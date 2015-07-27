@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/record_detail_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RecordDetailActivity"
+    tools:ignore="MergeRootFrame" >
+    
+ <!-- <include layout="@layout/exam_detail_content"/>
+    <include layout="@layout/representee_detail_content"/>	--> 
+    <include layout="@layout/exam_content"/>  
+    
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:background="#DD000000"
+        android:textColor="#FFFFFFFF"
+        android:text="   Actions"
+        android:contentDescription="Actions table begins here"
+        android:textSize="20sp" />
+    
+    <ListView
+         android:id="@+id/actionList"
+         android:background="#FFFFFFFF"
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent">
+    </ListView>
+
+ <!-- <TextView
+        android:id="@+id/student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/student_name"
+        android:contentDescription="@string/student_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing" />
+
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subject"
+        android:contentDescription="@string/subject"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing" />
+    
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:contentDescription="@string/location"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:contentDescription="@string/date"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing" />
+    
+    <TextView
+        android:id="@+id/created_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/created_by"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing" />
+    
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/status_new"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing" />	-->
+
+    
+</LinearLayout>    

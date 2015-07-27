@@ -1,0 +1,24 @@
+
+    
+    
+    
+    
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <item android:id="@+id/progress"
+          android:showAsAction="ifRoom" />
+        
+    <!--    <item android:id="@+id/login"
+          android:title="Login"
+          android:showAsAction="ifRoom" /> -->
+        
+        <item android:id="@+id/signup"
+          android:title="Signup" 
+          android:showAsAction="ifRoom" />
+        
+    </menu>
+
+
+
+
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/login.xml -->

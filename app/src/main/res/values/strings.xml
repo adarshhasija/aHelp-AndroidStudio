@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">aScribe</string>
+    <string name="login">LOGIN</string>
+    <string name="signup">SIGNUP</string>
+    <string name="ok">OK</string>
+    <string name="contacts">Contacts</string>
+    <string name="contact_details">Contact Details</string>
+    <string name="coordinator">Coordinator</string>
+    <string name="select_contact">Select Contact</string>
+    <string name="select_subject">Select Subject</string>
+    <string name="select_location">Select Location</string>
+    <string name="hint_enter_location">Enter Location</string>
+    <string name="representing_someone">Representing Someone</string>
+    
+    <string name="scribe_request">Scribe Request</string>
+    <string name="new_location">New location</string>
+    <string name="location_details">Location Details</string>
+    <string name="title_record_detail">Record Detail</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Enter name</string>
+    <string name="search_results">Search Results</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Password confirm</string>
+    <string name="user">User</string>
+    <string name="select_volunteer">Select volunteer</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="starting_balance">Starting balance</string>
+    <string name="bank_details">Bank details</string>
+    <string name="rupees">Rs</string>
+    <string name="paise">paise</string>
+    <string name="category">Category(eg: books)</string>
+    <string name="new_exam">New Exam</string>
+    <string name="new_record">New Record</string>
+    <string name="additional_notes">Additional notes</string>
+    <string name="archives">Archives</string>
+    <string name="amount">Amount</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="volunteer_name">Volunteer name</string>
+    <string name="student_name">Student name</string>
+    <string name="subject">Subject</string>
+    <string name="location">Location</string>
+    <string name="status_new">Status: NEW</string>
+    <string name="icon_scheduled">Icon: Scheduled</string>
+    
+    <!-- Exam notes section -->
+    <string name="notes">Notes. eg: Student name, student number</string>
+    <string name="select_month_year">Select month and year</string>
+    <string name="select_date">Select date</string>
+    <string name="select_time">Select time</string>
+    
+    <string name="locations">Locations</string>
+    <string name="subjects">Subjects</string>
+    <string name="subject_details">Subject Details</string>
+    <string name="reply">Reply</string>
+    
+    <string name="delete">Delete</string>
+    
+    <string name="changes">Changes</string>
+    
+    <string name="created_by">Record created by</string>
+    <string-array name="credit_debit">
+        <item>Credit</item>
+        <item>Debit</item>
+    </string-array>
+        <string name="message">Message</string>
+        <string name="record">Record</string>
+    <string name="title_activity_paces_picker">PacesPickerActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
+    <string name="title_activity_google_maps">Map</string>
+    <string name="title_activity_country_picker">CountryPickerActivity</string>
+    <string name="title_activity_phone_number">PhoneNumberActivity</string>
+
+</resources>

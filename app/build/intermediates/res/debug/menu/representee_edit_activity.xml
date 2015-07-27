@@ -1,0 +1,16 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        
+     <!-- <item android:id="@+id/accept"
+          android:icon="@drawable/ic_action_accept"
+          android:title="Accept"
+          android:showAsAction="ifRoom" />	-->
+        
+        <item
+        android:id="@+id/switchBtn"
+        android:title=""
+        android:showAsAction="always"
+        android:actionLayout="@layout/switch_for_actionbar" /> 
+        
+    </menu>
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/representee_edit_activity.xml -->

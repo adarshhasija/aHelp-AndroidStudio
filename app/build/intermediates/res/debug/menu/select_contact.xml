@@ -1,0 +1,33 @@
+
+    
+    
+    
+    
+    
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <item android:id="@+id/progress"
+            android:title="progress"
+          android:showAsAction="ifRoom" />
+        
+    	 <item android:id="@+id/search"
+          android:title="@string/search_title"
+          android:icon="@drawable/ic_action_search"
+          android:showAsAction="collapseActionView|ifRoom"
+          android:actionViewClass="android.widget.SearchView" />	
+        
+   <!-- <item android:id="@+id/send"
+          android:icon="@drawable/ic_action_send_now"
+          android:title="Send"
+          android:showAsAction="ifRoom" />	-->	
+        
+   	 <item android:id="@+id/refresh"
+          android:title="Refresh" />	
+        
+    </menu>
+
+
+
+
+
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/select_contact.xml -->

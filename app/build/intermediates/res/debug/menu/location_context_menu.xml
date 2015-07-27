@@ -1,0 +1,15 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <item android:id="@+id/discard"
+          android:icon="@drawable/ic_action_discard"
+          android:title="Discard"
+          android:showAsAction="ifRoom" />
+        
+        <item android:id="@+id/edit"
+          android:icon="@drawable/ic_action_edit"
+          android:title="Edit"
+          android:showAsAction="ifRoom" />
+        
+    </menu>
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/location_context_menu.xml -->
