@@ -25,13 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -183,7 +179,7 @@ public class SelectLocationActivity extends ListActivity implements GoogleApiCli
 		
 
 		  //Check for Google Play Services
-		  int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+		 /* int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 			if(status == ConnectionResult.SUCCESS) {
 				mGoogleApiClient = new GoogleApiClient
 						.Builder(this)
@@ -208,7 +204,8 @@ public class SelectLocationActivity extends ListActivity implements GoogleApiCli
 				} catch (GooglePlayServicesNotAvailableException e) {
 					e.printStackTrace();
 				}
-			}
+			}	*/
+
 
 		//populateList();
 

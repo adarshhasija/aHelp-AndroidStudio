@@ -28,7 +28,8 @@
             android:inputType="phone"
             android:ems="12"
             android:id="@+id/editTextPhoneNumber"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="@string/phone_number" />
     </LinearLayout>
 </RelativeLayout>
 <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/layout/activity_phone_number.xml -->

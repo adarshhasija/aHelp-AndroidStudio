@@ -1,27 +1,19 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import android.app.Application;
+import android.database.Cursor;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
-import com.parse.ParsePush;
 import com.parse.ParseUser;
 import com.parse.PushService;
-import com.parse.SaveCallback;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.util.Log;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainApplication extends Application{
 
@@ -63,8 +55,8 @@ public class MainApplication extends Application{
 		return localContacts;
 	}
 	
-	public ArrayList getUpdatedDeviceContactsListAsArray() {
-		ArrayList<String> localContacts=new ArrayList<String>();
+	public List getUpdatedDeviceContactsListAsArray() {
+		List<Contact> localContacts=new ArrayList<Contact>();
 		
 		Cursor data = getContentResolver()
 				.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -74,14 +66,17 @@ public class MainApplication extends Application{
 		data.moveToFirst();
 		while (data.isAfterLast() == false) 
 		{
-			//String number = data.getString(data.getColumnIndex(Phone.NUMBER));
+            Contact contact = new Contact();
+            int idIndex = data.getColumnIndex(Phone._ID);
 			int numberIndex = data.getColumnIndex(Phone.NUMBER);
 			int nameIndex = data.getColumnIndex(Phone.DISPLAY_NAME);
+            String id = data.getString(idIndex);
 			String number = data.getString(numberIndex).replaceAll("\\s+","");
 			String name = data.getString(nameIndex);
-		    if(!localContacts.contains(number)) {  
-		    	localContacts.add(number);
-		    }
+            contact.setId(id);
+            contact.setName(name);
+            contact.setNumber(number);
+            localContacts.add(contact);
 		    i++;
 		    data.moveToNext();
 		}

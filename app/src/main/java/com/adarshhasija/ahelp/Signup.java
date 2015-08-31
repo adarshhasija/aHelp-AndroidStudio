@@ -1,24 +1,6 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import com.adarshhasija.ahelp.R;
-import com.parse.ParseException;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.parse.SignUpCallback;
-
-import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
-import android.accounts.AccountManager;
-import android.app.Activity;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,14 +10,25 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class Signup extends AccountAuthenticatorActivity {
 	
 	private Map<String, String> isoMap = new HashMap<String, String>();
+
+
 	private MenuItem progressButton;
 	private MenuItem signupButton;
 	private SignUpCallback signUpCallback = new SignUpCallback() {
@@ -86,7 +79,8 @@ public class Signup extends AccountAuthenticatorActivity {
 			EditText passwordConfirmWidget = (EditText) findViewById(R.id.password_confirm);
 			EditText firstNameWidget = (EditText) findViewById(R.id.first_name);
 			EditText lastNameWidget = (EditText) findViewById(R.id.last_name);
-			
+
+
 			String phoneNumber = phoneNumberWidget.getText().toString();
 			String userName = phoneNumber; //the username will be the phone number without the country code
 			String password = passwordWidget.getText().toString();
@@ -104,7 +98,7 @@ public class Signup extends AccountAuthenticatorActivity {
 				Toast.makeText(Signup.this, "Email address is invalid", Toast.LENGTH_SHORT).show();
 				return false;
 			}	*/
-			if(phoneNumber.length() < 1) {
+			if(phoneNumber.isEmpty() || phoneNumber.length() < 1) {
 				Toast.makeText(Signup.this, "You have not entered a phone number", Toast.LENGTH_SHORT).show();
 				return;
 			}
@@ -176,13 +170,14 @@ public class Signup extends AccountAuthenticatorActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.signup);
 		
-		Spinner spinner = (Spinner) findViewById(R.id.countries_spinner);	
+		Spinner spinner = (Spinner) findViewById(R.id.countries_spinner);
 		String[] isoCountries = Locale.getISOCountries();
 		ArrayList<String> countries = new ArrayList<String>();
 		for(String countryISO : isoCountries) {
 			Locale locale = new Locale("en", countryISO);
             String name = locale.getDisplayCountry();
-            countries.add(name);
+			String countryCode = Iso2Phone.getPhone(countryISO);
+            countries.add(name + " (" + countryCode + ")");
             isoMap.put(name, countryISO);
 		}
 		Collections.sort(countries);
@@ -193,14 +188,17 @@ public class Signup extends AccountAuthenticatorActivity {
         .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(dataAdapter);
 		Locale current = getResources().getConfiguration().locale;
-		spinner.setSelection(countries.indexOf(current.getDisplayCountry()));
+        String currentName = current.getDisplayCountry();
+        String currentISO = isoMap.get(currentName);
+        String currentCode = Iso2Phone.getPhone(currentISO);
+		spinner.setSelection(countries.indexOf(current.getDisplayCountry() + " (" + currentCode + ")"));
 		
 		Button signupButton = (Button) findViewById(R.id.signup);
 		signupButton.setOnClickListener(signupCickListener);
 	}
-	
-	
-	@Override
+
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		getMenuInflater().inflate(R.menu.signup, menu);

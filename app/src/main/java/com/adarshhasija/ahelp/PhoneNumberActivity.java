@@ -1,10 +1,12 @@
 package com.adarshhasija.ahelp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class PhoneNumberActivity extends Activity {
@@ -37,6 +39,26 @@ public class PhoneNumberActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == R.id.action_accept) {
+            Bundle extras = getIntent().getExtras();
+            String countryCode = extras.getString("countryCode");
+            EditText editTextPhoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
+            String phoneNumber = editTextPhoneNumber.getText().toString();
+            if (phoneNumber.isEmpty()) {
+                Toast.makeText(PhoneNumberActivity.this, "You have not entered a phone number", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            Bundle bundle = new Bundle();
+            bundle.putString("countryCode", countryCode);
+            phoneNumber = phoneNumber.replaceAll("[^\\d+]", "");
+            bundle.putString("phoneNumber", phoneNumber);
+            Intent returnIntent = new Intent();
+            returnIntent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        }
 
 
         return super.onOptionsItemSelected(item);

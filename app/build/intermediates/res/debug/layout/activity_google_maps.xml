@@ -1,6 +1,0 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:id="@+id/map"
-    tools:context="com.adarshhasija.ahelp.GoogleMapsActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment" />
-<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/layout/activity_google_maps.xml -->

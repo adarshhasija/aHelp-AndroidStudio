@@ -297,13 +297,6 @@ available. Please contact the developer for assistance.</string>
     <string name="delete">Delete</string>
     <string name="email">Email</string>
     <string name="first_name">First name</string>
-    <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/debug/res/values/google_maps_api.xml -->
-    <eat-comment/>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyBH9XbLZPkLy71w1EKXJVCs-Wfq4Q0zUH8
-    </string>
-    <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
     <string name="hello_world">Hello world!</string>
     <string name="hint_enter_location">Enter Location</string>
     <string name="icon_scheduled">Icon: Scheduled</string>
@@ -316,12 +309,15 @@ available. Please contact the developer for assistance.</string>
     <string name="new_exam">New Exam</string>
     <string name="new_location">New location</string>
     <string name="new_record">New Record</string>
+    <string name="new_user">New User?</string>
+    <string name="no_records_to_show">No records to show</string>
     <string name="notes">Notes. eg: Student name, student number</string>
     <string name="ok">OK</string>
     <string name="paise">paise</string>
     <string name="password">Password</string>
     <string name="password_confirm">Password confirm</string>
-    <string name="phone_number">Phone number (no country code)</string>
+    <string name="phone_number">Phone number</string>
+    <string name="place_details">&lt;b>%1$s&lt;/b>&lt;br/>&lt;i>Place Id: %2$s&lt;/i>&lt;br/>Address: %3$s&lt;br/>Phone: %4$s&lt;br/>Website: %5$s</string>
     <string name="record">Record</string>
     <string name="reply">Reply</string>
     <string name="representing_someone">Representing Someone</string>
@@ -352,11 +348,15 @@ available. Please contact the developer for assistance.</string>
     <string name="subject_details">Subject Details</string>
     <string name="subjects">Subjects</string>
     <string name="time">Time</string>
+    <string name="title_activity_contact_records">ContactRecordsActivity</string>
     <string name="title_activity_country_picker">CountryPickerActivity</string>
+    <string name="title_activity_enter_location_string">EnterLocationStringActivity</string>
     <string name="title_activity_google_maps">Map</string>
     <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
+    <string name="title_activity_location_autocomplete">Location</string>
     <string name="title_activity_paces_picker">PacesPickerActivity</string>
     <string name="title_activity_phone_number">PhoneNumberActivity</string>
+    <string name="title_activity_select_scribe">SelectScribeActivity</string>
     <string name="title_record_detail">Record Detail</string>
     <string name="user">User</string>
     <string name="volunteer_name">Volunteer name</string>

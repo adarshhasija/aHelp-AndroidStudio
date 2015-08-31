@@ -80,5 +80,13 @@
     <string name="title_activity_google_maps">Map</string>
     <string name="title_activity_country_picker">CountryPickerActivity</string>
     <string name="title_activity_phone_number">PhoneNumberActivity</string>
+    <string name="new_user">New User?</string>
+    <string name="title_activity_contact_records">ContactRecordsActivity</string>
+    <string name="no_records_to_show">No records to show</string>
+    <string name="title_activity_enter_location_string">EnterLocationStringActivity</string>
+    <string name="title_activity_select_scribe">SelectScribeActivity</string>
+    <string name="title_activity_location_autocomplete">Location</string>
+
+    <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
 
 </resources>

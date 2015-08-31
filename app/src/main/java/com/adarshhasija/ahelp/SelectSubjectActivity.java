@@ -1,14 +1,5 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.parse.DeleteCallback;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -21,6 +12,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectSubjectActivity extends ListActivity {
 	
@@ -159,6 +159,7 @@ public class SelectSubjectActivity extends ListActivity {
 		bundle.putString("parseId", parseId);
 		bundle.putString("uuid", uuid);
 		bundle.putString("title", selectedString);
+		bundle.putString("subjectString", selectedString);
 
         Intent returnIntent = new Intent();
         returnIntent.putExtras(bundle);

@@ -27,19 +27,14 @@
 
     <uses-permission android:name="com.adarshhasija.ahelp.permission.C2D_MESSAGE" />
 
-    <android:uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-
     <!--
      The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.adarshhasija.ahelp.MainApplication"
@@ -55,7 +50,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBH9XbLZPkLy71w1EKXJVCs-Wfq4Q0zUH8" />
+            android:value="AIzaSyB50vl01okuYxJciwuOEInfk2h4lRWtSlw" />
 
         <activity
             android:name="com.adarshhasija.ahelp.MainActivity"
@@ -246,14 +241,12 @@
             android:label="@string/title_activity_google_play_services" >
         </activity>
 
-        <meta-data
+        <!--
+            <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
+        -->
 
-        <activity
-            android:name="com.adarshhasija.ahelp.GoogleMapsActivity"
-            android:label="@string/title_activity_google_maps" >
-        </activity>
         <activity
             android:name="com.adarshhasija.ahelp.CountryPickerActivity"
             android:label="@string/title_activity_country_picker" >
@@ -261,6 +254,22 @@
         <activity
             android:name="com.adarshhasija.ahelp.PhoneNumberActivity"
             android:label="@string/title_activity_phone_number" >
+        </activity>
+        <activity
+            android:name="com.adarshhasija.ahelp.ContactRecordsActivity"
+            android:label="@string/title_activity_contact_records" >
+        </activity>
+        <activity
+            android:name="com.adarshhasija.ahelp.EnterLocationStringActivity"
+            android:label="@string/title_activity_enter_location_string" >
+        </activity>
+        <activity
+            android:name="com.adarshhasija.ahelp.SelectScribeActivity"
+            android:label="@string/title_activity_select_scribe" >
+        </activity>
+        <activity
+            android:name="com.adarshhasija.ahelp.LocationAutocompleteActivity"
+            android:label="@string/title_activity_location_autocomplete" >
         </activity>
     </application>
 

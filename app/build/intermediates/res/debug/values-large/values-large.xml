@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/values-large/refs.xml -->
+    <eat-comment/>
+    <item name="activity_record_list" type="layout">@layout/activity_record_twopane</item>
+</resources>

@@ -1,16 +1,5 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -21,13 +10,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class MainListActivity extends ListActivity {
 	
@@ -131,7 +130,7 @@ public class MainListActivity extends ListActivity {
 
 		@Override
 		public boolean onQueryTextChange(String newText) {
-			RecordAdapter adapter = (RecordAdapter) getListAdapter();
+			MainContactsListAdapter adapter = (MainContactsListAdapter) getListAdapter();
 			if(adapter != null) {
 				adapter.getFilter().filter(newText);
 			}
@@ -192,11 +191,16 @@ public class MainListActivity extends ListActivity {
 	 * 
 	 */	
 	private void populateList() {
-		populateListLocal();
+        MainApplication mainApplication = (MainApplication) getBaseContext().getApplicationContext();
+        List<Contact> localContacts = mainApplication.getUpdatedDeviceContactsListAsArray();
+		MainContactsListAdapter adapter = new MainContactsListAdapter(this, 0, localContacts);
+		setListAdapter(adapter);
+        
+	/*	populateListLocal();
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
 		if(cm.getActiveNetworkInfo() != null) {
 			//populateListCloud();
-		}
+		}   */
 	}
 	
 	private void populateListLocal() {
@@ -321,13 +325,21 @@ public class MainListActivity extends ListActivity {
 		super.onListItemClick(listView, view, position, id);
 
 		//Pass the ParseObject as a global variable
-		ParseObject record = (ParseObject) getListAdapter().getItem(position);
+		/*ParseObject record = (ParseObject) getListAdapter().getItem(position);
 		Intent intent = new Intent(this, MainDetailActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putString("parseId", record.getObjectId());
 		bundle.putString("uuid", record.getString("uuid"));
 		intent.putExtras(bundle);
-		startActivityForResult(intent, position);
+		startActivityForResult(intent, position);   */
+        Contact contact = (Contact) getListAdapter().getItem(position);
+        Intent intent = new Intent(this, ContactRecordsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("id", contact.getId());
+        bundle.putString("number", contact.getNumber());
+        bundle.putString("name", contact.getName());
+        intent.putExtras(bundle);
+        startActivity(intent);
 	}
 	
 	
@@ -337,7 +349,7 @@ public class MainListActivity extends ListActivity {
 	    switch (item.getItemId()) {
 	        case R.id.search:
 	            return true;
-	        case R.id.add:
+	    /*    case R.id.add:
 	            addPressed();
 	            return true;
 	        case R.id.contacts:
@@ -348,10 +360,7 @@ public class MainListActivity extends ListActivity {
 	        	return true;
 	        case R.id.refresh:
 	        	refreshPressed();
-	        	return true;
-	        case R.id.logout:
-	        	logoutPressed();
-	        	return true;
+	        	return true;	*/
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -378,11 +387,11 @@ public class MainListActivity extends ListActivity {
 	    //searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 	    
 		
-		addButton = (MenuItem)menu.findItem(R.id.add);
-		contactsButton = (MenuItem)menu.findItem(R.id.contacts);
-		coordinatorButton = (MenuItem)menu.findItem(R.id.coordinator);
-		refreshButton = (MenuItem)menu.findItem(R.id.refresh);
-		logoutButton = (MenuItem)menu.findItem(R.id.logout);
+		//addButton = (MenuItem)menu.findItem(R.id.add);
+		//contactsButton = (MenuItem)menu.findItem(R.id.contacts);
+		//coordinatorButton = (MenuItem)menu.findItem(R.id.coordinator);
+		//refreshButton = (MenuItem)menu.findItem(R.id.refresh);
+		//logoutButton = (MenuItem)menu.findItem(R.id.logout);
 		
 		return super.onCreateOptionsMenu(menu);
 	}

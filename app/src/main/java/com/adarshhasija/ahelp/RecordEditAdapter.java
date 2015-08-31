@@ -1,17 +1,13 @@
 package com.adarshhasija.ahelp;
 
-import java.util.List;
-
-import com.adarshhasija.ahelp.RecordAdapter.ViewHolderRecord;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class RecordEditAdapter extends ArrayAdapter<String> {
 	  private final Context context;
@@ -49,7 +45,7 @@ public class RecordEditAdapter extends ArrayAdapter<String> {
 	    if(position == 0) viewHolder.labelView.setText("Date and Time");
 	    if(position == 1) viewHolder.labelView.setText("Location");
 	    if(position == 2) viewHolder.labelView.setText("Subject");
-	    if(position == 3) viewHolder.labelView.setText("Representing Someone?");
+	    if(position == 3) viewHolder.labelView.setText("Select Scribe");
 	    viewHolder.contentView.setText(values.get(position));
 	    viewHolder.contentView.setContentDescription(viewHolder.labelView.getText() + " " + viewHolder.contentView.getText());
 

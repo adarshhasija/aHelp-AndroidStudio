@@ -1,27 +1,12 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.SearchManager;
-import android.app.ActionBar.OnNavigationListener;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -29,22 +14,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.adarshhasija.ahelp.dummy.DummyContent;
-import com.adarshhasija.ahelp.R;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * A list fragment representing a list of Records. This fragment also supports
@@ -533,7 +516,7 @@ public class RecordListFragment extends ListFragment {
 	    switch (item.getItemId()) {
 	        case R.id.search:
 	            return true;
-	        case R.id.add:
+	      /*  case R.id.add:
 	            addPressed();
 	            return true;
 	        case R.id.contacts:
@@ -544,10 +527,7 @@ public class RecordListFragment extends ListFragment {
 	        	return true;
 	        case R.id.refresh:
 	        	refreshPressed();
-	        	return true;
-	        case R.id.logout:
-	        	logoutPressed();
-	        	return true;
+	        	return true;	*/
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -574,11 +554,11 @@ public class RecordListFragment extends ListFragment {
 	    //searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 	    
 		
-		addButton = (MenuItem)menu.findItem(R.id.add);
-		contactsButton = (MenuItem)menu.findItem(R.id.contacts);
-		coordinatorButton = (MenuItem)menu.findItem(R.id.coordinator);
-		refreshButton = (MenuItem)menu.findItem(R.id.refresh);
-		logoutButton = (MenuItem)menu.findItem(R.id.logout);
+		//addButton = (MenuItem)menu.findItem(R.id.add);
+		//contactsButton = (MenuItem)menu.findItem(R.id.contacts);
+		//coordinatorButton = (MenuItem)menu.findItem(R.id.coordinator);
+		//refreshButton = (MenuItem)menu.findItem(R.id.refresh);
+		//logoutButton = (MenuItem)menu.findItem(R.id.logout);
 		
 		super.onCreateOptionsMenu(menu, inflater);
 	}

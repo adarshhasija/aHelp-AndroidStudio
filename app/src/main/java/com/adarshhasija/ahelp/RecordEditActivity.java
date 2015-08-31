@@ -1,63 +1,35 @@
 package com.adarshhasija.ahelp;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.adarshhasija.ahelp.R;
-import com.parse.FindCallback;
 import com.parse.FunctionCallback;
 import com.parse.GetCallback;
-import com.parse.ParseACL;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
-import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.ListActivity;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 public class RecordEditActivity extends ListActivity { //extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 	
@@ -68,12 +40,18 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 	//This is the reference to the currently selected location
 	private String locationUuid;
 	private String locationParseId;
+    private String locationString=null;
 	//This is a reference to the currently selected subject
 	private String subjectUuid;
 	private String subjectParseId;
+    private String subjectString=null;
 	private String representeePhoneNumber;
 	private String representeeFirstName;
 	private String representeeLastName;
+    //This is a reference to the selected scribe
+    private String scribeId=null;
+    private String scribeName=null;
+    private String scribeNumber=null;
 	
 	//MenuItems
 	private MenuItem progressButton;
@@ -171,7 +149,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
     	if(!validate()) {
     		return;
     	}
-    	ParseObject oldScribeRequest = oldScribeRequestSetup(scribeRequest);
+    /*	ParseObject oldScribeRequest = oldScribeRequestSetup(scribeRequest);
     	ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRequest");
     	query.fromLocalDatastore();
     	try {
@@ -212,7 +190,15 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}   */
+
+        ParseObject record = new ParseObject("Record");
+
+        long dateTimeMillis = dateTime.getTimeInMillis();
+        Calendar dateTime = Calendar.getInstance();
+        dateTime.setTimeInMillis(dateTimeMillis);
+        Date finalDate = dateTime.getTime();
+
     }
     
     /*
@@ -227,19 +213,24 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 			return false;
 		}
 		
-		if(scribeRequest != null) {
+	/*	if(scribeRequest != null) {
 			return true;
-		}
+		}   */
 		
-		if(locationUuid == null && locationParseId == null) {
+		if(locationString == null) {
 			Toast.makeText(getBaseContext(), "You have not selected a location", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		
-		if(subjectUuid == null && subjectParseId == null) {
+		if(subjectString == null) {
 			Toast.makeText(getBaseContext(), "You have not selected a subject", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+
+        if(scribeName == null) {
+            Toast.makeText(getBaseContext(), "You have not selected a scribe", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     	
     	return true;
     }
@@ -648,7 +639,8 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 				startActivityForResult(intent, position);
 				return;
 			case 1:
-				intent = new Intent(RecordEditActivity.this, SelectLocationActivity.class);
+				//intent = new Intent(RecordEditActivity.this, SelectLocationActivity.class);
+                intent = new Intent(RecordEditActivity.this, EnterLocationStringActivity.class);
 				startActivityForResult(intent, position);
 				return;
 			case 2:
@@ -656,16 +648,14 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 				startActivityForResult(intent, position);
 				return;
 			case 3:
-				bundle = new Bundle();
+			/*	bundle = new Bundle();
 		        bundle.putString("phoneNumber", representeePhoneNumber);
 		        bundle.putString("firstName", representeeFirstName);
 		        bundle.putString("lastName", representeeLastName);
-		        //Exam exam = new Exam(123, "abc");
-		        //exam.setParseId("12345");
-		        //bundle.putParcelable("parcelable", exam);
 				
-				intent = new Intent(RecordEditActivity.this, RepresenteeEditActivity.class);
-				intent.putExtras(bundle);
+				intent = new Intent(RecordEditActivity.this, RepresenteeEditActivity.class);    */
+                intent = new Intent(RecordEditActivity.this, SelectScribeActivity.class);
+				//intent.putExtras(bundle);
 				startActivityForResult(intent, position);
 				return;
 			default:
@@ -711,24 +701,27 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 					adapter.notifyDataSetChanged();
 					return;
 				case 1:
-					locationUuid = extras.getString("uuid");
-					locationParseId = extras.getString("parseId");
+					//locationUuid = extras.getString("uuid");
+					//locationParseId = extras.getString("parseId");
+                    locationString = extras.getString("locationString");
 					adapter.remove(adapter.getItem(1));
-					adapter.insert(extras.getString("title"), 1);
+					//adapter.insert(extras.getString("title"), 1);
+                    adapter.insert(locationString, 1);
 					adapter.notifyDataSetChanged();
 					return;
 				case 2:
-					subjectUuid = extras.getString("uuid");
-					subjectParseId = extras.getString("parseId");
+					//subjectUuid = extras.getString("uuid");
+					//subjectParseId = extras.getString("parseId");
+                    subjectString = extras.getString("subjectString");
 					adapter.remove(adapter.getItem(2));
-					adapter.insert(extras.getString("title"), 2);
+					adapter.insert(subjectString, 2);
 					adapter.notifyDataSetChanged();
 					return;
 				case 3:
 					adapter.remove(adapter.getItem(3));
 					
 					String notes;
-					if(extras.getString("phoneNumber") != null &&
+				/*	if(extras.getString("phoneNumber") != null &&
 							extras.getString("firstName") != null && 
 								extras.getString("lastName") != null) {
 						representeePhoneNumber = extras.getString("phoneNumber");
@@ -743,7 +736,12 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 						representeeFirstName = null;
 						representeeLastName = null;
 						adapter.insert("No", 3);
-					}
+					}   */
+                    scribeId = extras.getString("scribeId");
+                    scribeName = extras.getString("scribeName");
+                    scribeNumber = extras.getString("scribeNumber");
+                    notes = scribeName;
+                    adapter.insert(notes, 3);
 					adapter.notifyDataSetChanged();
 					return;
 				case 50000: //This means we are returning from SelectContactActivity and new event has been successfully created
@@ -788,8 +786,9 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		
 		nextButton = (MenuItem)menu.findItem(R.id.next);
 		saveButton = (MenuItem)menu.findItem(R.id.save);
-		
-		Bundle extras = getIntent().getExtras();
+
+		nextButton.setVisible(false);
+	/*	Bundle extras = getIntent().getExtras();
 		if(extras != null) {
 			nextButton.setVisible(false);
 			saveButton.setVisible(true);
@@ -797,7 +796,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		else {
 			nextButton.setVisible(true);
 			saveButton.setVisible(false);
-		}
+		}	*/
 		
 		return super.onCreateOptionsMenu(menu);
 	}

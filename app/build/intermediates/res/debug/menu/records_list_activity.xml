@@ -12,30 +12,30 @@
           android:showAsAction="collapseActionView|always"
           android:actionViewClass="android.widget.SearchView" />
         
-        <item android:id="@+id/add"
+    <!--    <item android:id="@+id/add"
           android:icon="@drawable/ic_action_new"
           android:title="New"
-          android:showAsAction="always" />
+          android:showAsAction="always" />  -->
         
    <!-- <item
         android:id="@+id/refresh"
         android:showAsAction="never"
         android:title="Refresh"/>	-->
         
-        <item
+    <!--    <item
         android:id="@+id/contacts"
         android:showAsAction="never"
-        android:title="Contacts"/>
+        android:title="Contacts"/>  -->
        
-        <item
+    <!--    <item
         android:id="@+id/coordinator"
         android:showAsAction="never"
-        android:title="Coordinator"/>
+        android:title="Coordinator"/>   -->
         
-       <item
+    <!--   <item
         android:id="@+id/logout"
         android:showAsAction="never"
-        android:title="Logout"/>   
+        android:title="Logout"/>    -->
         
     </menu>
 

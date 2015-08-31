@@ -1,41 +1,31 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.adarshhasija.ahelp.R;
-import com.parse.DeleteCallback;
-import com.parse.FindCallback;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseInstallation;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Login extends Activity {
-	
-	private boolean shouldSignupBeVisible = true;
+
 	private MenuItem progressButton;
-	private MenuItem loginButton;
-	private MenuItem signupButton;
 	
 	
 	/*
@@ -51,7 +41,6 @@ public class Login extends Activity {
 		        saveContacts(list);
 		    } else {
 		    	progressButton.setVisible(false);
-		    	if(shouldSignupBeVisible == true) signupButton.setVisible(true);
 		    	Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 		    }
 		}
@@ -62,23 +51,16 @@ public class Login extends Activity {
 		@Override
 		public void done(ParseUser user, ParseException e) {
 			progressButton.setVisible(false);
-			if(shouldSignupBeVisible) {
-				signupButton.setVisible(true);
-			} 
 			
 			if (user != null) {
-				ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+			/*	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 				installation.put("phoneNumber", user.getString("phoneNumber"));
-				installation.saveInBackground(); 
+				installation.saveInBackground();    */
 				
 				populateContactsList();
-				
-				//Intent mainIntent = new Intent(Login.this, MainListActivity.class);
-				//startActivity(mainIntent);
 		    } else {
 		    	Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		    	progressButton.setVisible(false);
-		    	if(shouldSignupBeVisible == true) signupButton.setVisible(true);
 		    }
 		}
 		
@@ -122,8 +104,7 @@ public class Login extends Activity {
 			if(phoneNumber.startsWith("+91")) {
 				phoneNumber = phoneNumber.substring(3);
 			}
-			
-			signupButton.setVisible(false);
+
 			progressButton.setActionView(R.layout.action_progressbar);
             progressButton.expandActionView();
 			progressButton.setVisible(true);
@@ -197,6 +178,15 @@ public class Login extends Activity {
 		
 		Button loginButton = (Button) findViewById(R.id.login);
 		loginButton.setOnClickListener(loginCickListener);
+
+		Button signupButton = (Button) findViewById(R.id.signup);
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(Login.this, Signup.class);
+                startActivity(mainIntent);
+            }
+        });
 	}
 
 	@Override
@@ -219,65 +209,13 @@ public class Login extends Activity {
 		
 		progressButton = (MenuItem)menu.findItem(R.id.progress);
 		progressButton.setVisible(false);
-		
-	/*	loginButton = (MenuItem)menu.findItem(R.id.login);
-		loginButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
-			@Override
-			public boolean onMenuItemClick(MenuItem arg0) {
-				EditText emailWidget = (EditText) findViewById(R.id.email);
-				EditText passwordWidget = (EditText) findViewById(R.id.password);
-				
-				String email = emailWidget.getText().toString();
-				String password = passwordWidget.getText().toString();
-				
-				ConnectivityManager cm = (ConnectivityManager) getSystemService(Login.this.CONNECTIVITY_SERVICE);
-				if(cm.getActiveNetworkInfo() == null) {
-					Toast.makeText(Login.this, "No internet connection", Toast.LENGTH_SHORT).show();
-					return false;
-				}
-				
-				if(!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
-					Toast.makeText(Login.this, "Email address is invalid", Toast.LENGTH_SHORT).show();
-					return false;
-				}
-				
-				if(password.isEmpty()) {
-					Toast.makeText(Login.this, "You have not entered a password", Toast.LENGTH_SHORT).show();
-					return false;
-				}
-				
-				loginButton.setVisible(false);
-				signupButton.setVisible(false);
-				progressButton.setActionView(R.layout.action_progressbar);
-	            progressButton.expandActionView();
-				progressButton.setVisible(true);
-				
-				ParseUser.logInInBackground(email, password, logInCallback);
-				
-				return false;
-			}
-			
-		});	*/
-		
-		signupButton = (MenuItem)menu.findItem(R.id.signup);
-		signupButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
-			@Override
-			public boolean onMenuItemClick(MenuItem arg0) {
-				Intent mainIntent = new Intent(Login.this, Signup.class);
-				startActivity(mainIntent);
-				
-				return false;
-			}
-			
-		});
-		ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+	/*	ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 		String phoneNumber = installation.getString("phoneNumber");
 		if(phoneNumber != null) {
-			signupButton.setVisible(false);
-			shouldSignupBeVisible = false;
-		}
+
+		}   */
 		
 		return super.onCreateOptionsMenu(menu);
 	}

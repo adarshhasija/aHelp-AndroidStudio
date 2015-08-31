@@ -28,13 +28,15 @@ public class MainActivity extends Activity {
 		
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if(currentUser != null) {
-			Intent intent = new Intent(this, CountryPickerActivity.class);
+			//Intent intent = new Intent(this, MainListActivity.class);
+			Intent intent = new Intent(this, LocationAutocompleteActivity.class);
 			startActivity(intent);
 			finish();						 	 
 		}
 		else {
-			Intent loginIntent = new Intent(this, Login.class);
-			startActivity(loginIntent);
+			//Intent intent = new Intent(this, Login.class);
+            Intent intent = new Intent(this, LocationAutocompleteActivity.class);
+			startActivity(intent);
 			finish();
 		}	
 	}

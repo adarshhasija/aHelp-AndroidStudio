@@ -45,6 +45,26 @@
         android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
         android:text="@string/login" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/new_user"
+        android:id="@+id/textViewNewUser"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/signup"
+        android:contentDescription="@string/signup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:textColor="#FFFFFFFF"
+        android:background="#FF0000FF"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
+        android:text="@string/signup" />
+
 
 </LinearLayout>
 <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/layout/login.xml -->

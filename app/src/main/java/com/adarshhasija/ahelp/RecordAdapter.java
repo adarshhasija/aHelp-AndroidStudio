@@ -1,24 +1,6 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import org.json.JSONArray;
-
-import com.adarshhasija.ahelp.R;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +9,16 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterable {
 
@@ -260,7 +252,7 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 		visibilitySettings(viewHolder);
 		
 	    ParseObject record = recordList.get(position);
-	    ParseUser creator = record.getParseUser("createdBy");
+	 /*   ParseUser creator = record.getParseUser("createdBy");
 	    List<ParseObject> actionList;
 	    ParseObject lastAction=null;
 	    try {
@@ -273,21 +265,21 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}	*/
 		if(record != null) {
-			if(lastAction != null) {
+		/*	if(lastAction != null) {
 				int imageResource = getStatusIcon(record, viewHolder);
 				viewHolder.iconView.setImageResource(imageResource);
-			}
+			}	*/
 			
-			viewHolder.userView.setText(creator.getString("firstName") + " " + creator.getString("lastName"));
+			viewHolder.userView.setText("ABC");
 			String recordDateTime = getDateValueAsString(record.getDate("dateTime"));
 			viewHolder.dateTimeView.setText(recordDateTime);
-			String lastActionString=null;
+		/*	String lastActionString=null;
 			if(lastAction != null) {
 				lastActionString = getLastActionFormatted(lastAction);
 				viewHolder.lastActionView.setText(lastActionString);
-			}
+			}	*/
 			
 			if(record.getObjectId() != null) {
 				String updatedAt = getDateValueAsString(record.getUpdatedAt());
@@ -299,7 +291,7 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 				status = "scribe found";
 			}
 			
-			if(lastActionString != null) {
+		/*	if(lastActionString != null) {
 				convertView.setContentDescription(creator.getString("firstName") + " " + 
 						creator.getString("lastName") + " has an exam on " + 
 							recordDateTime + ". The last action is " + lastActionString + ". Current status is: "+ status);
@@ -308,7 +300,7 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 				convertView.setContentDescription(creator.getString("firstName") + " " + 
 												creator.getString("lastName") + " has an exam on " + 
 													recordDateTime + ". Current status is: "+ status);
-			}
+			}	*/
 			//viewHolder.categoryView.setTag(record);
 		}
 
