@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class DatePickerActivity extends ListActivity {
-	
+
 	private Calendar dateTime=null;
 
 	@Override
@@ -25,33 +25,29 @@ public class DatePickerActivity extends ListActivity {
 		int year = extras.getInt("year");
 		
 		dateTime = Calendar.getInstance();
+        dateTime.set(Calendar.YEAR, year);
 		dateTime.add(Calendar.MONTH, (month - dateTime.get(Calendar.MONTH)));
-		dateTime.set(Calendar.YEAR, year);
 		
 		String monthString = dateTime.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
 		//setTitle(monthString + " " + dateTime.get(Calendar.YEAR));
-	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		ArrayList<String> list = new ArrayList<String>();
-		Calendar c = Calendar.getInstance();
-		if(		c.get(Calendar.HOUR_OF_DAY) == 23 && 
+        ArrayList<String> list = new ArrayList<String>();
+        Calendar c = Calendar.getInstance();
+	/*	if(		c.get(Calendar.HOUR_OF_DAY) == 23 &&
 				c.get(Calendar.MINUTE) > 45) {
 			c.add(Calendar.MINUTE, 15);  //We are going to set it to the next day
-		}
-		int start = 1;
-		if(dateTime.get(Calendar.MONTH) == c.get(Calendar.MONTH)) {
-			start = c.get(Calendar.DAY_OF_MONTH);
-		}
-		int end = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-		for(int i=start; i < end+1; i++) {
-			list.add(Integer.toString(i));
-		}
-		
-		LargeHeightSimpleArrayAdapter adapter = new LargeHeightSimpleArrayAdapter(this, 0, list);
+		}	*/
+        int start = 1;
+        if(month == c.get(Calendar.MONTH) &&
+                year == c.get(Calendar.YEAR)) {
+                start = c.get(Calendar.DAY_OF_MONTH);
+        }
+        int end = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for(int i=start; i < end+1; i++) {
+            list.add(Integer.toString(i));
+        }
+
+        LargeHeightSimpleArrayAdapter adapter = new LargeHeightSimpleArrayAdapter(this, 0, list);
         setListAdapter(adapter);
 	}
 

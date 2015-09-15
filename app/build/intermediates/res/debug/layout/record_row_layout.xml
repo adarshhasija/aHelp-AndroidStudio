@@ -81,7 +81,23 @@
         android:text="Subject"
         android:contentDescription="Subject"
         android:textSize="14sp"
-          android:visibility="gone" />
+          android:visibility="visible" />
+
+
+      <TextView
+          android:id="@+id/other_person"
+          android:layout_width="fill_parent"
+          android:layout_height="26dip"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentRight="true"
+          android:layout_marginLeft="5dp"
+          android:layout_toRightOf="@id/icon"
+          android:ellipsize="marquee"
+          android:singleLine="true"
+          android:text="Other person"
+          android:contentDescription="Other person"
+          android:textSize="14sp"
+          android:visibility="visible" />
 
       <TextView
         android:id="@+id/lastAction"

@@ -3,13 +3,13 @@
     
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
         
-        <item android:id="@+id/progress"
-          android:showAsAction="ifRoom" />
+        <!--<item android:id="@+id/progress"
+          android:showAsAction="ifRoom" />-->
         
-        <item android:id="@+id/next"
+        <!--<item android:id="@+id/next"
           android:icon="@drawable/ic_action_next_item"
           android:title="Next"
-          android:showAsAction="ifRoom" />
+          android:showAsAction="ifRoom" />-->
         
         <item android:id="@+id/save"
           android:icon="@drawable/ic_action_save"

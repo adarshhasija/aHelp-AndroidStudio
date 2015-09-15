@@ -42,7 +42,7 @@ public class RecordEditAdapter extends ArrayAdapter<String> {
 			viewHolder = (ViewHolderRecord) convertView.getTag();
 		}
 	    
-	    if(position == 0) viewHolder.labelView.setText("Date and Time");
+	    if(position == 0) viewHolder.labelView.setText("Date");
 	    if(position == 1) viewHolder.labelView.setText("Location");
 	    if(position == 2) viewHolder.labelView.setText("Subject");
 	    if(position == 3) viewHolder.labelView.setText("Select Scribe");

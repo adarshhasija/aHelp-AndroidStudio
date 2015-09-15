@@ -30,6 +30,9 @@ public class ContactRecordsActivity extends Activity {
     private String mContactName;
     private String mContactNumber;
 
+    private int month;
+    private int year;
+
     private Button buttonMonthYear;
     private ListView listView;
     private Button buttonNewRecord;
@@ -140,6 +143,8 @@ public class ContactRecordsActivity extends Activity {
         setTitle(mContactName);
         buttonMonthYear = (Button) findViewById(R.id.buttonMonthYear);
         Calendar c = Calendar.getInstance();
+        month = c.get(Calendar.MONTH);
+        year = c.get(Calendar.YEAR);
         buttonMonthYear.setText(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + c.get(Calendar.YEAR));
         buttonMonthYear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,8 +168,8 @@ public class ContactRecordsActivity extends Activity {
                     bundle.putString("id", extras.getString("id"));
                     bundle.putString("number", extras.getString("number"));
                     bundle.putString("name", extras.getString("name"));
-                    bundle.putInt("month", extras.getInt("month"));
-                    bundle.putInt("year", extras.getInt("year"));
+                    bundle.putInt("month", month);
+                    bundle.putInt("year", year);
                     intent.putExtras(bundle);
                 }
                 startActivityForResult(intent, 0);
@@ -181,8 +186,8 @@ public class ContactRecordsActivity extends Activity {
 
         if (resultCode == Activity.RESULT_OK && requestCode == 5000 && data != null) {
             Bundle extras = data.getExtras();
-            int month = extras.getInt("month");
-            int year = extras.getInt("year");
+            month = extras.getInt("month");
+            year = extras.getInt("year");
             Calendar c = Calendar.getInstance();
             c.set(Calendar.MONTH, month);
             c.set(Calendar.YEAR, year);
@@ -213,8 +218,8 @@ public class ContactRecordsActivity extends Activity {
                 bundle.putString("id", extras.getString("id"));
                 bundle.putString("number", extras.getString("number"));
                 bundle.putString("name", extras.getString("name"));
-                bundle.putInt("month", extras.getInt("month"));
-                bundle.putInt("year", extras.getInt("year"));
+                bundle.putInt("month", month);
+                bundle.putInt("year", year);
                 intent.putExtras(bundle);
             }
             startActivityForResult(intent, 0);
