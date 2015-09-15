@@ -1,6 +1,9 @@
 package com.adarshhasija.ahelp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +28,16 @@ import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocationAutocompleteActivity extends Activity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -48,6 +62,9 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
 
     private static final LatLngBounds BOUNDS_INDIA = new LatLngBounds(
             new LatLng(10.8505160, 76.2710830), new LatLng(28.6139390, 77.2090210));
+
+
+    private List<ParseObject> locationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +92,66 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
         mAdapter = new PlaceAutocompleteAdapter(this, android.R.layout.simple_list_item_1,
                 mGoogleApiClient, BOUNDS_INDIA, null);
         mAutocompleteView.setAdapter(mAdapter);
+
+        final ListView listView = (ListView) findViewById(R.id.list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                ParseObject place = locationList.get(position);
+                Intent returnIntent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("placeName", place.getString("placeName"));
+                bundle.putString("placeId", place.getString("placeId"));
+                bundle.putString("placeAddress", place.getString("placeAddress"));
+                bundle.putString("placePhoneNumber", place.getString("placePhoneNumber"));
+                bundle.putDouble("latitude", place.getDouble("latitude"));
+                bundle.putDouble("longitude", place.getDouble("latitude"));
+                returnIntent.putExtras(bundle);
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                ParseObject place = locationList.get(position);
+
+                new AlertDialog.Builder(LocationAutocompleteActivity.this)
+                        .setTitle(place.getString("placeName"))
+                        .setMessage(place.getString("placeAddress"))
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
+                return true;
+            }
+        });
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Location");
+        query.fromLocalDatastore();
+        query.whereEqualTo("owner", ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e == null) {
+                    locationList = list;
+                    List<String> tmpList = new ArrayList<String>();
+                    for (ParseObject p : list) {
+                        tmpList.add(p.getString("placeName"));
+                    }
+                    LargeHeightSimpleArrayAdapter adapter = new LargeHeightSimpleArrayAdapter(getApplicationContext(), 0, tmpList);
+                    listView.setAdapter(adapter);
+                }
+                else {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -120,8 +197,8 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
                     .getPlaceById(mGoogleApiClient, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
 
-            Toast.makeText(getApplicationContext(), "Clicked: " + item.description,
-                    Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(getApplicationContext(), "Clicked: " + item.description,
+                    Toast.LENGTH_SHORT).show();*/
             Log.i(TAG, "Called getPlaceById to get Place details for " + item.placeId);
         }
     };
@@ -143,11 +220,61 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
             }
             // Get the Place object from the buffer.
             final Place place = places.get(0);
+            final String pId = place.getId();
+            final String pName = place.getName().toString();
+            final String pAddress = place.getAddress().toString();
+            final String pPhoneNumber = place.getPhoneNumber().toString();
 
+            LatLng latlong = place.getLatLng();
+            final Double pLatitude = latlong.latitude;
+            final Double pLongitude = latlong.longitude;
             // Format details of the place for display and show it in a TextView.
-            mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
+            /* mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
                     place.getId(), place.getAddress(), place.getPhoneNumber(),
-                    place.getWebsiteUri()));
+                    place.getWebsiteUri()));    */
+            new AlertDialog.Builder(LocationAutocompleteActivity.this)
+                    .setTitle(place.getName())
+                    .setMessage(place.getAddress())
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            ParseObject locationObject = new ParseObject("Location");
+                            locationObject.put("owner", ParseUser.getCurrentUser());
+                            locationObject.put("placeName", pName);
+                            locationObject.put("placeId", pId);
+                            locationObject.put("placeAddress", pAddress);
+                            locationObject.put("placePhoneNumber", pPhoneNumber);
+
+                            ParseGeoPoint geoPoint = new ParseGeoPoint(pLatitude, pLongitude);
+                            locationObject.put("placeLatLng", geoPoint);
+
+                            locationObject.saveEventually();
+                            locationObject.pinInBackground("Location", new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    Intent returnIntent = new Intent();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("placeName", pName);
+                                    bundle.putString("placeId", pId);
+                                    bundle.putString("placeAddress", pAddress);
+                                    bundle.putString("placePhoneNumber", pPhoneNumber);
+                                    bundle.putDouble("latitude", pLatitude);
+                                    bundle.putDouble("longitude", pLongitude);
+                                    returnIntent.putExtras(bundle);
+                                    setResult(Activity.RESULT_OK, returnIntent);
+                                    finish();
+                                }
+                            });
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
 
             // Display the third party attributions if set.
            /* final CharSequence thirdPartyAttribution = places.getAttributions();

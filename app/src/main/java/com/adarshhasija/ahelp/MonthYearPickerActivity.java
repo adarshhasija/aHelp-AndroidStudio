@@ -1,23 +1,28 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MonthYearPickerActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String name = extras.getString("name");
+            if (name != null) {
+                setTitle(name);
+            }
+        }
 	}
 
 	@Override
@@ -26,23 +31,30 @@ public class MonthYearPickerActivity extends ListActivity {
 		
 		ArrayList<String> list = new ArrayList<String>();
 		Calendar c = Calendar.getInstance();
-		if(		c.getActualMaximum(Calendar.DAY_OF_MONTH) == c.get(Calendar.MONTH) &&
+		c.add(Calendar.MONTH, -6);
+	/*	if(		c.getActualMaximum(Calendar.DAY_OF_MONTH) == c.get(Calendar.MONTH) &&
 				c.get(Calendar.HOUR_OF_DAY) == 23 && 
 				c.get(Calendar.MINUTE) > 45) {
 			c.add(Calendar.MINUTE, 15);  //We are going to set it to the next day
-		}
+		}	*/
 		String monthString= "";
 		int year = 0;
-		for(int i=0; i < 6; i++) {
+        Calendar tempC = Calendar.getInstance();
+        int selectedIndex = 0;
+		for(int i=0; i < 12/*6*/; i++) {
 			monthString = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
 			year = c.get(Calendar.YEAR);
 			list.add(monthString + " " + year);
-			//c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
+            if (c.get(Calendar.YEAR) == tempC.get(Calendar.YEAR) &&
+                    c.get(Calendar.MONTH) == tempC.get(Calendar.MONTH)) {
+                selectedIndex = i;
+            }
 			c.add(Calendar.MONTH, 1);
 		}
 		
 		LargeHeightSimpleArrayAdapter adapter = new LargeHeightSimpleArrayAdapter(this, 0, list);
         setListAdapter(adapter);
+        getListView().setSelection(selectedIndex);
 	}
 
 	@Override
@@ -50,14 +62,17 @@ public class MonthYearPickerActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.MONTH, position);
+		//c.add(Calendar.MONTH, position);
+        c.add(Calendar.MONTH, position - 6);
 		Bundle bundle = new Bundle();
         bundle.putInt("month", c.get(Calendar.MONTH));
         bundle.putInt("year", c.get(Calendar.YEAR));
 
-        Intent intent = new Intent(this,DatePickerActivity.class);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, position);
+        //Intent intent = new Intent(this,DatePickerActivity.class);
+        Intent returnIntent = new Intent();
+        returnIntent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
 	}
 
 	@Override

@@ -27,7 +27,9 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 	private final List<ParseObject> backupList; //used when filtering is happening
 	static class ViewHolderRecord {
 	    TextView userView;
+        TextView locationView;
 	    TextView subjectView;
+        TextView otherPersonView;
 	    TextView dateTimeView;
 	    TextView lastActionView;
 	    TextView updatedAtDateView;
@@ -239,7 +241,9 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 			viewHolder = new ViewHolderRecord();
 			viewHolder.iconView = (ImageView) convertView.findViewById(R.id.icon);
 			viewHolder.userView = (TextView) convertView.findViewById(R.id.user);
+            viewHolder.locationView = (TextView) convertView.findViewById(R.id.location);
 			viewHolder.subjectView = (TextView) convertView.findViewById(R.id.subject);
+            viewHolder.otherPersonView = (TextView) convertView.findViewById(R.id.other_person);
 			viewHolder.lastActionView = (TextView) convertView.findViewById(R.id.lastAction);
 			viewHolder.dateTimeView = (TextView) convertView.findViewById(R.id.recordDateTime);
 			viewHolder.updatedAtDateView = (TextView) convertView.findViewById(R.id.updatedAtDate);
@@ -252,55 +256,23 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 		visibilitySettings(viewHolder);
 		
 	    ParseObject record = recordList.get(position);
-	 /*   ParseUser creator = record.getParseUser("createdBy");
-	    List<ParseObject> actionList;
-	    ParseObject lastAction=null;
-	    try {
-			creator.fetchFromLocalDatastore();
-			ParseObject scribeRequestLocation = record.getParseObject("location");
-			scribeRequestLocation.fetchFromLocalDatastore();
-			actionList = record.getList("actions");
-			lastAction = (ParseObject) actionList.get(actionList.size()-1); //GET THE MOST RECENT ACTION
-			lastAction.fetchFromLocalDatastore();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	*/
 		if(record != null) {
-		/*	if(lastAction != null) {
-				int imageResource = getStatusIcon(record, viewHolder);
-				viewHolder.iconView.setImageResource(imageResource);
-			}	*/
-			
-			viewHolder.userView.setText("ABC");
 			String recordDateTime = getDateValueAsString(record.getDate("dateTime"));
+            String placeName = record.getString("placeName");
+            String subject = record.getString("subject");
 			viewHolder.dateTimeView.setText(recordDateTime);
-		/*	String lastActionString=null;
-			if(lastAction != null) {
-				lastActionString = getLastActionFormatted(lastAction);
-				viewHolder.lastActionView.setText(lastActionString);
-			}	*/
+            viewHolder.locationView.setText(placeName);
+            viewHolder.subjectView.setText(subject);
+
 			
 			if(record.getObjectId() != null) {
 				String updatedAt = getDateValueAsString(record.getUpdatedAt());
 				viewHolder.updatedAtDateView.setText(updatedAt);
 				viewHolder.updatedAtDateView.setContentDescription("Last modified: "+updatedAt);
 			}
-			String status = "needs scribe";
-			if(record.getBoolean("status")) {
-				status = "scribe found";
-			}
-			
-		/*	if(lastActionString != null) {
-				convertView.setContentDescription(creator.getString("firstName") + " " + 
-						creator.getString("lastName") + " has an exam on " + 
-							recordDateTime + ". The last action is " + lastActionString + ". Current status is: "+ status);
-			}
-			else {
-				convertView.setContentDescription(creator.getString("firstName") + " " + 
-												creator.getString("lastName") + " has an exam on " + 
-													recordDateTime + ". Current status is: "+ status);
-			}	*/
+
+			convertView.setContentDescription("Exam on " + recordDateTime + " at " + placeName + ". Tap for more details");
+
 			//viewHolder.categoryView.setTag(record);
 		}
 

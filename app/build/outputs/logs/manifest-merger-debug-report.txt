@@ -102,6 +102,9 @@ MERGED from com.google.android.gms:play-services-base:7.0.0:18:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.github.alamkanak:android-week-view:1.2.3:5:5
+MERGED from com.android.support:appcompat-v7:22.0.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -271,6 +274,9 @@ MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.google.android.gms:play-services-wearable:7.0.0:19:5
 MERGED from com.google.android.gms:play-services-base:7.0.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.android.support:appcompat-v7:22.0.0:22:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.github.alamkanak:android-week-view:1.2.3:9:5
 MERGED from com.android.support:appcompat-v7:22.0.0:22:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:label

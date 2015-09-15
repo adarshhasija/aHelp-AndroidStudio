@@ -41,6 +41,12 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 	private String locationUuid;
 	private String locationParseId;
     private String locationString=null;
+	private String placeId;
+	private String placeName;
+	private String placeAddress;
+	private String placePhoneNumber;
+	private Double latitude;
+	private Double longitude;
 	//This is a reference to the currently selected subject
 	private String subjectUuid;
 	private String subjectParseId;
@@ -635,12 +641,13 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		
 		switch (position) {
 			case 0:
-				intent = new Intent(RecordEditActivity.this, MonthYearPickerActivity.class);
+				//intent = new Intent(RecordEditActivity.this, MonthYearPickerActivity.class);
+				intent = new Intent(RecordEditActivity.this, DatePickerActivity.class);
 				startActivityForResult(intent, position);
 				return;
 			case 1:
 				//intent = new Intent(RecordEditActivity.this, SelectLocationActivity.class);
-                intent = new Intent(RecordEditActivity.this, EnterLocationStringActivity.class);
+                intent = new Intent(RecordEditActivity.this, LocationAutocompleteActivity.class);
 				startActivityForResult(intent, position);
 				return;
 			case 2:
@@ -703,10 +710,16 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 				case 1:
 					//locationUuid = extras.getString("uuid");
 					//locationParseId = extras.getString("parseId");
-                    locationString = extras.getString("locationString");
+                    //locationString = extras.getString("locationString");
+                    placeId = extras.getString("placeId");
+                    placeName = extras.getString("placeName");
+                    placeAddress = extras.getString("placeAddress");
+                    placePhoneNumber = extras.getString("placePhoneNumber");
+                    longitude = extras.getDouble("longitude");
+                    latitude = extras.getDouble("latitude");
 					adapter.remove(adapter.getItem(1));
 					//adapter.insert(extras.getString("title"), 1);
-                    adapter.insert(locationString, 1);
+                    adapter.insert(placeName, 1);
 					adapter.notifyDataSetChanged();
 					return;
 				case 2:

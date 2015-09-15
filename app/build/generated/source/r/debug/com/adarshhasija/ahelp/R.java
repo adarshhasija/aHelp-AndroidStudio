@@ -463,6 +463,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int colorSwitchThumbNormal=0x7f0100b0;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int columnGap=0x7f0100d5;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -511,6 +521,26 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int customNavigationLayout=0x7f01000f;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int dayBackgroundColor=0x7f0100d9;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>length_short</code></td><td>1</td><td></td></tr>
+<tr><td><code>length_long</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int dayNameLength=0x7f0100e1;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -617,10 +647,65 @@ containing a value of this type.
 </table>
          */
         public static final int environment=0x7f0100c1;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int eventMarginVertical=0x7f0100e3;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int eventPadding=0x7f0100df;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int eventTextColor=0x7f0100de;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int eventTextSize=0x7f0100d2;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int expandActivityOverflowButtonDrawable=0x7f01001e;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>sunday</code></td><td>1</td><td></td></tr>
+<tr><td><code>monday</code></td><td>2</td><td></td></tr>
+<tr><td><code>tuesday</code></td><td>3</td><td></td></tr>
+<tr><td><code>wednesday</code></td><td>4</td><td></td></tr>
+<tr><td><code>thursday</code></td><td>5</td><td></td></tr>
+<tr><td><code>friday</code></td><td>6</td><td></td></tr>
+<tr><td><code>saturday</code></td><td>7</td><td></td></tr>
+</table>
+         */
+        public static final int firstDayOfWeek=0x7f0100cf;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -650,6 +735,53 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int goIcon=0x7f01004d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int headerColumnBackground=0x7f0100e0;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int headerColumnPadding=0x7f0100d3;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int headerColumnTextColor=0x7f0100d6;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int headerRowBackgroundColor=0x7f0100d8;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int headerRowPadding=0x7f0100d4;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -676,6 +808,35 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int homeLayout=0x7f010010;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int hourHeight=0x7f0100d0;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int hourSeparatorColor=0x7f0100da;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int hourSeparatorHeight=0x7f0100dd;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -922,6 +1083,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
          */
         public static final int navigationMode=0x7f010004;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int noOfVisibleDays=0x7f0100d7;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -930,6 +1099,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int overlapAnchor=0x7f010047;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int overlappingEventGap=0x7f0100e2;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -1203,6 +1382,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
         public static final int textColorSearchUrl=0x7f01009a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textSize=0x7f0100d1;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -1293,6 +1482,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int titleTextStyle=0x7f010007;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int todayBackgroundColor=0x7f0100db;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int todayHeaderTextColor=0x7f0100dc;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -1470,6 +1677,14 @@ containing a value of this type.
 </table>
          */
         public static final int windowTransitionStyle=0x7f010023;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int xScrollingSpeed=0x7f0100e4;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1742,155 +1957,167 @@ containing a value of this type.
         public static final int up_arrow=0x7f020067;
     }
     public static final class id {
-        public static final int accept=0x7f0e008b;
-        public static final int action=0x7f0e0055;
-        public static final int actionList=0x7f0e006d;
-        public static final int action_accept=0x7f0e0093;
-        public static final int action_bar=0x7f0e0046;
+        public static final int accept=0x7f0e0097;
+        public static final int action=0x7f0e005e;
+        public static final int actionList=0x7f0e0079;
+        public static final int action_accept=0x7f0e009f;
+        public static final int action_bar=0x7f0e004f;
         public static final int action_bar_activity_content=0x7f0e0000;
-        public static final int action_bar_container=0x7f0e0045;
-        public static final int action_bar_root=0x7f0e0041;
+        public static final int action_bar_container=0x7f0e004e;
+        public static final int action_bar_root=0x7f0e004a;
         public static final int action_bar_spinner=0x7f0e0001;
-        public static final int action_bar_subtitle=0x7f0e0034;
-        public static final int action_bar_title=0x7f0e0033;
-        public static final int action_context_bar=0x7f0e0047;
+        public static final int action_bar_subtitle=0x7f0e003d;
+        public static final int action_bar_title=0x7f0e003c;
+        public static final int action_context_bar=0x7f0e0050;
         public static final int action_menu_divider=0x7f0e0002;
         public static final int action_menu_presenter=0x7f0e0003;
-        public static final int action_mode_bar=0x7f0e0043;
-        public static final int action_mode_bar_stub=0x7f0e0042;
-        public static final int action_mode_close_button=0x7f0e0035;
-        public static final int action_new=0x7f0e0092;
-        public static final int action_settings=0x7f0e0094;
-        public static final int activity_chooser_view_content=0x7f0e0036;
-        public static final int add=0x7f0e0090;
+        public static final int action_mode_bar=0x7f0e004c;
+        public static final int action_mode_bar_stub=0x7f0e004b;
+        public static final int action_mode_close_button=0x7f0e003e;
+        public static final int action_new=0x7f0e009e;
+        public static final int action_settings=0x7f0e00a0;
+        public static final int activity_chooser_view_content=0x7f0e003f;
+        public static final int add=0x7f0e009c;
         public static final int adjust_height=0x7f0e0017;
         public static final int adjust_width=0x7f0e0018;
         public static final int always=0x7f0e001c;
-        public static final int autocomplete_places=0x7f0e0059;
+        public static final int autocomplete_places=0x7f0e0064;
         public static final int beginning=0x7f0e0014;
         public static final int book_now=0x7f0e002c;
+        public static final int buttonMonthYear=0x7f0e0061;
+        public static final int buttonNewRecord=0x7f0e005f;
         public static final int buyButton=0x7f0e0029;
         public static final int buy_now=0x7f0e002d;
         public static final int buy_with_google=0x7f0e002e;
-        public static final int call=0x7f0e0080;
-        public static final int checkbox=0x7f0e003e;
+        public static final int call=0x7f0e008c;
+        public static final int checkbox=0x7f0e0047;
         public static final int classic=0x7f0e0030;
         public static final int collapseActionView=0x7f0e001d;
-        public static final int content=0x7f0e007a;
-        public static final int countries_spinner=0x7f0e0085;
-        public static final int datePicker=0x7f0e0078;
-        public static final int dateTime=0x7f0e0064;
-        public static final int decor_content_parent=0x7f0e0044;
-        public static final int default_activity_button=0x7f0e0039;
-        public static final int delete=0x7f0e008e;
+        public static final int content=0x7f0e0086;
+        public static final int countries_spinner=0x7f0e0091;
+        public static final int datePicker=0x7f0e0084;
+        public static final int dateTime=0x7f0e0070;
+        public static final int decor_content_parent=0x7f0e004d;
+        public static final int default_activity_button=0x7f0e0042;
+        public static final int delete=0x7f0e009a;
         public static final int dialog=0x7f0e0021;
         public static final int disableHome=0x7f0e000c;
-        public static final int discard=0x7f0e008d;
+        public static final int discard=0x7f0e0099;
+        public static final int divider=0x7f0e0065;
         public static final int donate_with_google=0x7f0e002f;
         public static final int dropdown=0x7f0e0022;
-        public static final int edit=0x7f0e0069;
-        public static final int editTextCountryCode=0x7f0e005c;
-        public static final int editTextLocation=0x7f0e0058;
-        public static final int editTextPhoneNumber=0x7f0e005d;
-        public static final int edit_query=0x7f0e0048;
-        public static final int email=0x7f0e0072;
+        public static final int edit=0x7f0e0075;
+        public static final int editTextCountryCode=0x7f0e0068;
+        public static final int editTextLocation=0x7f0e0063;
+        public static final int editTextPhoneNumber=0x7f0e0069;
+        public static final int edit_query=0x7f0e0051;
+        public static final int email=0x7f0e007e;
         public static final int end=0x7f0e0015;
-        public static final int exam=0x7f0e0068;
-        public static final int exam_content=0x7f0e0067;
-        public static final int expand_activities_button=0x7f0e0037;
-        public static final int expanded_menu=0x7f0e003d;
-        public static final int explanation=0x7f0e0081;
-        public static final int first_name=0x7f0e0083;
+        public static final int exam=0x7f0e0074;
+        public static final int exam_content=0x7f0e0073;
+        public static final int expand_activities_button=0x7f0e0040;
+        public static final int expanded_menu=0x7f0e0046;
+        public static final int explanation=0x7f0e008d;
+        public static final int first_name=0x7f0e008f;
+        public static final int friday=0x7f0e0033;
         public static final int grayscale=0x7f0e0031;
-        public static final int header=0x7f0e006c;
+        public static final int header=0x7f0e0078;
         public static final int holo_dark=0x7f0e0024;
         public static final int holo_light=0x7f0e0025;
         public static final int home=0x7f0e0004;
         public static final int homeAsUp=0x7f0e000d;
         public static final int hybrid=0x7f0e0019;
-        public static final int icon=0x7f0e003b;
+        public static final int icon=0x7f0e0044;
         public static final int ifRoom=0x7f0e001e;
-        public static final int image=0x7f0e0038;
-        public static final int label=0x7f0e006e;
-        public static final int lastAction=0x7f0e007b;
-        public static final int last_name=0x7f0e0084;
-        public static final int list=0x7f0e0056;
+        public static final int image=0x7f0e0041;
+        public static final int label=0x7f0e007a;
+        public static final int lastAction=0x7f0e0087;
+        public static final int last_name=0x7f0e0090;
+        public static final int length_long=0x7f0e003a;
+        public static final int length_short=0x7f0e003b;
+        public static final int list=0x7f0e0062;
         public static final int listMode=0x7f0e0009;
-        public static final int listView=0x7f0e0060;
-        public static final int list_item=0x7f0e003a;
-        public static final int listview=0x7f0e0076;
-        public static final int location=0x7f0e0065;
-        public static final int login=0x7f0e0073;
-        public static final int mainContent=0x7f0e0063;
+        public static final int listView=0x7f0e006c;
+        public static final int list_item=0x7f0e0043;
+        public static final int listview=0x7f0e0082;
+        public static final int location=0x7f0e0071;
+        public static final int login=0x7f0e007f;
+        public static final int mainContent=0x7f0e006f;
         public static final int match_parent=0x7f0e002b;
         public static final int middle=0x7f0e0016;
+        public static final int monday=0x7f0e0034;
         public static final int monochrome=0x7f0e0032;
         public static final int never=0x7f0e001f;
-        public static final int next=0x7f0e0095;
+        public static final int next=0x7f0e00a1;
         public static final int none=0x7f0e000e;
         public static final int normal=0x7f0e000a;
-        public static final int notes=0x7f0e0061;
-        public static final int password=0x7f0e0071;
-        public static final int password_confirm=0x7f0e0086;
-        public static final int phoneNumber=0x7f0e0062;
-        public static final int phone_number=0x7f0e0070;
-        public static final int place=0x7f0e006f;
-        public static final int place_attribution=0x7f0e005b;
-        public static final int place_details=0x7f0e005a;
+        public static final int notes=0x7f0e006d;
+        public static final int password=0x7f0e007d;
+        public static final int password_confirm=0x7f0e0092;
+        public static final int phoneNumber=0x7f0e006e;
+        public static final int phone_number=0x7f0e007c;
+        public static final int place=0x7f0e007b;
+        public static final int place_attribution=0x7f0e0067;
+        public static final int place_details=0x7f0e0066;
         public static final int production=0x7f0e0026;
-        public static final int progress=0x7f0e0089;
-        public static final int progressBar=0x7f0e0054;
+        public static final int progress=0x7f0e0095;
+        public static final int progressBar=0x7f0e005d;
         public static final int progress_circular=0x7f0e0005;
         public static final int progress_horizontal=0x7f0e0006;
-        public static final int radio=0x7f0e0040;
-        public static final int recordDateTime=0x7f0e006b;
-        public static final int recordTime=0x7f0e0088;
-        public static final int record_detail_container=0x7f0e005e;
-        public static final int record_list=0x7f0e005f;
-        public static final int refresh=0x7f0e0091;
-        public static final int representee=0x7f0e007d;
-        public static final int representee_name=0x7f0e007e;
-        public static final int representee_phone_number=0x7f0e007f;
+        public static final int radio=0x7f0e0049;
+        public static final int recordDateTime=0x7f0e0077;
+        public static final int recordTime=0x7f0e0094;
+        public static final int record_detail_container=0x7f0e006a;
+        public static final int record_list=0x7f0e006b;
+        public static final int refresh=0x7f0e009d;
+        public static final int representee=0x7f0e0089;
+        public static final int representee_name=0x7f0e008a;
+        public static final int representee_phone_number=0x7f0e008b;
         public static final int sandbox=0x7f0e0027;
         public static final int satellite=0x7f0e001a;
-        public static final int save=0x7f0e008f;
-        public static final int search=0x7f0e008c;
-        public static final int search_badge=0x7f0e004a;
-        public static final int search_bar=0x7f0e0049;
-        public static final int search_button=0x7f0e004b;
-        public static final int search_close_btn=0x7f0e0050;
-        public static final int search_edit_frame=0x7f0e004c;
-        public static final int search_go_btn=0x7f0e0052;
-        public static final int search_mag_icon=0x7f0e004d;
-        public static final int search_plate=0x7f0e004e;
-        public static final int search_src_text=0x7f0e004f;
-        public static final int search_voice_btn=0x7f0e0053;
+        public static final int saturday=0x7f0e0035;
+        public static final int save=0x7f0e009b;
+        public static final int search=0x7f0e0098;
+        public static final int search_badge=0x7f0e0053;
+        public static final int search_bar=0x7f0e0052;
+        public static final int search_button=0x7f0e0054;
+        public static final int search_close_btn=0x7f0e0059;
+        public static final int search_edit_frame=0x7f0e0055;
+        public static final int search_go_btn=0x7f0e005b;
+        public static final int search_mag_icon=0x7f0e0056;
+        public static final int search_plate=0x7f0e0057;
+        public static final int search_src_text=0x7f0e0058;
+        public static final int search_voice_btn=0x7f0e005c;
         public static final int selectionDetails=0x7f0e002a;
-        public static final int send=0x7f0e008a;
-        public static final int shortcut=0x7f0e003f;
+        public static final int send=0x7f0e0096;
+        public static final int shortcut=0x7f0e0048;
         public static final int showCustom=0x7f0e000f;
         public static final int showHome=0x7f0e0010;
         public static final int showTitle=0x7f0e0011;
-        public static final int signingUpLbl=0x7f0e0082;
-        public static final int signup=0x7f0e0075;
+        public static final int signingUpLbl=0x7f0e008e;
+        public static final int signup=0x7f0e0081;
         public static final int slide=0x7f0e0013;
         public static final int split_action_bar=0x7f0e0007;
         public static final int strict_sandbox=0x7f0e0028;
-        public static final int student=0x7f0e0077;
-        public static final int subject=0x7f0e0066;
-        public static final int submit_area=0x7f0e0051;
-        public static final int switchBtn=0x7f0e0096;
-        public static final int switchForActionBar=0x7f0e0087;
+        public static final int student=0x7f0e0083;
+        public static final int subject=0x7f0e0072;
+        public static final int submit_area=0x7f0e005a;
+        public static final int sunday=0x7f0e0036;
+        public static final int switchBtn=0x7f0e00a2;
+        public static final int switchForActionBar=0x7f0e0093;
         public static final int tabMode=0x7f0e000b;
         public static final int terrain=0x7f0e001b;
-        public static final int textViewEmpty=0x7f0e0057;
-        public static final int textViewNewUser=0x7f0e0074;
-        public static final int timePicker=0x7f0e0079;
-        public static final int title=0x7f0e003c;
+        public static final int textViewNewUser=0x7f0e0080;
+        public static final int textViewNoRecords=0x7f0e0060;
+        public static final int thursday=0x7f0e0037;
+        public static final int timePicker=0x7f0e0085;
+        public static final int title=0x7f0e0045;
+        public static final int tuesday=0x7f0e0038;
         public static final int up=0x7f0e0008;
-        public static final int updatedAtDate=0x7f0e007c;
+        public static final int updatedAtDate=0x7f0e0088;
         public static final int useLogo=0x7f0e0012;
-        public static final int user=0x7f0e006a;
+        public static final int user=0x7f0e0076;
+        public static final int wednesday=0x7f0e0039;
         public static final int withText=0x7f0e0020;
         public static final int wrap_content=0x7f0e0023;
     }
@@ -2007,10 +2234,12 @@ containing a value of this type.
         public static final int amount=0x7f070033;
         public static final int app_name=0x7f070034;
         public static final int archives=0x7f070035;
-        public static final int bank_details=0x7f070036;
-        public static final int cancel=0x7f070037;
-        public static final int category=0x7f070038;
-        public static final int changes=0x7f070039;
+        public static final int autocomplete_hint=0x7f070036;
+        public static final int bank_details=0x7f070037;
+        public static final int cancel=0x7f070038;
+        public static final int category=0x7f070039;
+        public static final int change_date_button=0x7f07003a;
+        public static final int changes=0x7f07003b;
         public static final int common_android_wear_notification_needs_update_text=0x7f070010;
         public static final int common_android_wear_update_text=0x7f070011;
         public static final int common_android_wear_update_title=0x7f070012;
@@ -2042,76 +2271,77 @@ containing a value of this type.
         public static final int common_signin_button_text=0x7f07002c;
         public static final int common_signin_button_text_long=0x7f07002d;
         public static final int commono_google_play_services_api_unavailable_text=0x7f07002e;
-        public static final int contact_details=0x7f07003a;
-        public static final int contacts=0x7f07003b;
-        public static final int coordinator=0x7f07003c;
-        public static final int create_calendar_message=0x7f07003d;
-        public static final int create_calendar_title=0x7f07003e;
-        public static final int created_by=0x7f07003f;
-        public static final int date=0x7f070040;
-        public static final int decline=0x7f070041;
-        public static final int delete=0x7f070042;
-        public static final int email=0x7f070043;
-        public static final int first_name=0x7f070044;
-        public static final int hello_world=0x7f070045;
-        public static final int hint_enter_location=0x7f070046;
-        public static final int icon_scheduled=0x7f070047;
-        public static final int last_name=0x7f070048;
-        public static final int location=0x7f070049;
-        public static final int location_details=0x7f07004a;
-        public static final int locations=0x7f07004b;
-        public static final int login=0x7f07004c;
-        public static final int message=0x7f07004d;
-        public static final int new_exam=0x7f07004e;
-        public static final int new_location=0x7f07004f;
-        public static final int new_record=0x7f070050;
-        public static final int new_user=0x7f070051;
-        public static final int no_records_to_show=0x7f070052;
-        public static final int notes=0x7f070053;
-        public static final int ok=0x7f070054;
-        public static final int paise=0x7f070055;
-        public static final int password=0x7f070056;
-        public static final int password_confirm=0x7f070057;
-        public static final int phone_number=0x7f070058;
-        public static final int place_details=0x7f070059;
-        public static final int record=0x7f07005a;
-        public static final int reply=0x7f07005b;
-        public static final int representing_someone=0x7f07005c;
-        public static final int rupees=0x7f07005d;
-        public static final int save=0x7f07005e;
-        public static final int scribe_request=0x7f07005f;
-        public static final int search_hint=0x7f070060;
-        public static final int search_results=0x7f070061;
-        public static final int search_title=0x7f070062;
-        public static final int select_contact=0x7f070063;
-        public static final int select_date=0x7f070064;
-        public static final int select_location=0x7f070065;
-        public static final int select_month_year=0x7f070066;
-        public static final int select_subject=0x7f070067;
-        public static final int select_time=0x7f070068;
-        public static final int select_volunteer=0x7f070069;
-        public static final int signup=0x7f07006a;
-        public static final int starting_balance=0x7f07006b;
-        public static final int status_new=0x7f07006c;
-        public static final int store_picture_message=0x7f07006d;
-        public static final int store_picture_title=0x7f07006e;
-        public static final int student_name=0x7f07006f;
-        public static final int subject=0x7f070070;
-        public static final int subject_details=0x7f070071;
-        public static final int subjects=0x7f070072;
-        public static final int time=0x7f070073;
-        public static final int title_activity_contact_records=0x7f070074;
-        public static final int title_activity_country_picker=0x7f070075;
-        public static final int title_activity_enter_location_string=0x7f070076;
-        public static final int title_activity_google_maps=0x7f070077;
-        public static final int title_activity_google_play_services=0x7f070078;
-        public static final int title_activity_location_autocomplete=0x7f070079;
-        public static final int title_activity_paces_picker=0x7f07007a;
-        public static final int title_activity_phone_number=0x7f07007b;
-        public static final int title_activity_select_scribe=0x7f07007c;
-        public static final int title_record_detail=0x7f07007d;
-        public static final int user=0x7f07007e;
-        public static final int volunteer_name=0x7f07007f;
+        public static final int contact_details=0x7f07003c;
+        public static final int contacts=0x7f07003d;
+        public static final int coordinator=0x7f07003e;
+        public static final int create_calendar_message=0x7f07003f;
+        public static final int create_calendar_title=0x7f070040;
+        public static final int created_by=0x7f070041;
+        public static final int date=0x7f070042;
+        public static final int decline=0x7f070043;
+        public static final int delete=0x7f070044;
+        public static final int email=0x7f070045;
+        public static final int first_name=0x7f070046;
+        public static final int hello_world=0x7f070047;
+        public static final int hint_enter_location=0x7f070048;
+        public static final int icon_scheduled=0x7f070049;
+        public static final int last_name=0x7f07004a;
+        public static final int location=0x7f07004b;
+        public static final int location_details=0x7f07004c;
+        public static final int locations=0x7f07004d;
+        public static final int login=0x7f07004e;
+        public static final int message=0x7f07004f;
+        public static final int new_exam=0x7f070050;
+        public static final int new_location=0x7f070051;
+        public static final int new_record=0x7f070052;
+        public static final int new_user=0x7f070053;
+        public static final int no_records=0x7f070054;
+        public static final int no_records_to_show=0x7f070055;
+        public static final int notes=0x7f070056;
+        public static final int ok=0x7f070057;
+        public static final int paise=0x7f070058;
+        public static final int password=0x7f070059;
+        public static final int password_confirm=0x7f07005a;
+        public static final int phone_number=0x7f07005b;
+        public static final int place_details=0x7f07005c;
+        public static final int record=0x7f07005d;
+        public static final int reply=0x7f07005e;
+        public static final int representing_someone=0x7f07005f;
+        public static final int rupees=0x7f070060;
+        public static final int save=0x7f070061;
+        public static final int scribe_request=0x7f070062;
+        public static final int search_hint=0x7f070063;
+        public static final int search_results=0x7f070064;
+        public static final int search_title=0x7f070065;
+        public static final int select_contact=0x7f070066;
+        public static final int select_date=0x7f070067;
+        public static final int select_location=0x7f070068;
+        public static final int select_month_year=0x7f070069;
+        public static final int select_subject=0x7f07006a;
+        public static final int select_time=0x7f07006b;
+        public static final int select_volunteer=0x7f07006c;
+        public static final int signup=0x7f07006d;
+        public static final int starting_balance=0x7f07006e;
+        public static final int status_new=0x7f07006f;
+        public static final int store_picture_message=0x7f070070;
+        public static final int store_picture_title=0x7f070071;
+        public static final int student_name=0x7f070072;
+        public static final int subject=0x7f070073;
+        public static final int subject_details=0x7f070074;
+        public static final int subjects=0x7f070075;
+        public static final int time=0x7f070076;
+        public static final int title_activity_contact_records=0x7f070077;
+        public static final int title_activity_country_picker=0x7f070078;
+        public static final int title_activity_enter_location_string=0x7f070079;
+        public static final int title_activity_google_maps=0x7f07007a;
+        public static final int title_activity_google_play_services=0x7f07007b;
+        public static final int title_activity_location_autocomplete=0x7f07007c;
+        public static final int title_activity_paces_picker=0x7f07007d;
+        public static final int title_activity_phone_number=0x7f07007e;
+        public static final int title_activity_select_scribe=0x7f07007f;
+        public static final int title_record_detail=0x7f070080;
+        public static final int user=0x7f070081;
+        public static final int volunteer_name=0x7f070082;
         public static final int wallet_buy_button_place_holder=0x7f07002f;
     }
     public static final class style {
@@ -6579,5 +6809,412 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.adarshhasija.ahelp:maskedWalletDetailsTextAppearance
         */
         public static final int WalletFragmentStyle_maskedWalletDetailsTextAppearance = 4;
+        /** Attributes that can be used with a WeekView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #WeekView_columnGap com.adarshhasija.ahelp:columnGap}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_dayBackgroundColor com.adarshhasija.ahelp:dayBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_dayNameLength com.adarshhasija.ahelp:dayNameLength}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_eventMarginVertical com.adarshhasija.ahelp:eventMarginVertical}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_eventPadding com.adarshhasija.ahelp:eventPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_eventTextColor com.adarshhasija.ahelp:eventTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_eventTextSize com.adarshhasija.ahelp:eventTextSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_firstDayOfWeek com.adarshhasija.ahelp:firstDayOfWeek}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_headerColumnBackground com.adarshhasija.ahelp:headerColumnBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_headerColumnPadding com.adarshhasija.ahelp:headerColumnPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_headerColumnTextColor com.adarshhasija.ahelp:headerColumnTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_headerRowBackgroundColor com.adarshhasija.ahelp:headerRowBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_headerRowPadding com.adarshhasija.ahelp:headerRowPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_hourHeight com.adarshhasija.ahelp:hourHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_hourSeparatorColor com.adarshhasija.ahelp:hourSeparatorColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_hourSeparatorHeight com.adarshhasija.ahelp:hourSeparatorHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_noOfVisibleDays com.adarshhasija.ahelp:noOfVisibleDays}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_overlappingEventGap com.adarshhasija.ahelp:overlappingEventGap}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_textSize com.adarshhasija.ahelp:textSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_todayBackgroundColor com.adarshhasija.ahelp:todayBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_todayHeaderTextColor com.adarshhasija.ahelp:todayHeaderTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #WeekView_xScrollingSpeed com.adarshhasija.ahelp:xScrollingSpeed}</code></td><td></td></tr>
+           </table>
+           @see #WeekView_columnGap
+           @see #WeekView_dayBackgroundColor
+           @see #WeekView_dayNameLength
+           @see #WeekView_eventMarginVertical
+           @see #WeekView_eventPadding
+           @see #WeekView_eventTextColor
+           @see #WeekView_eventTextSize
+           @see #WeekView_firstDayOfWeek
+           @see #WeekView_headerColumnBackground
+           @see #WeekView_headerColumnPadding
+           @see #WeekView_headerColumnTextColor
+           @see #WeekView_headerRowBackgroundColor
+           @see #WeekView_headerRowPadding
+           @see #WeekView_hourHeight
+           @see #WeekView_hourSeparatorColor
+           @see #WeekView_hourSeparatorHeight
+           @see #WeekView_noOfVisibleDays
+           @see #WeekView_overlappingEventGap
+           @see #WeekView_textSize
+           @see #WeekView_todayBackgroundColor
+           @see #WeekView_todayHeaderTextColor
+           @see #WeekView_xScrollingSpeed
+         */
+        public static final int[] WeekView = {
+            0x7f0100cf, 0x7f0100d0, 0x7f0100d1, 0x7f0100d2,
+            0x7f0100d3, 0x7f0100d4, 0x7f0100d5, 0x7f0100d6,
+            0x7f0100d7, 0x7f0100d8, 0x7f0100d9, 0x7f0100da,
+            0x7f0100db, 0x7f0100dc, 0x7f0100dd, 0x7f0100de,
+            0x7f0100df, 0x7f0100e0, 0x7f0100e1, 0x7f0100e2,
+            0x7f0100e3, 0x7f0100e4
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#columnGap}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:columnGap
+        */
+        public static final int WeekView_columnGap = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#dayBackgroundColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:dayBackgroundColor
+        */
+        public static final int WeekView_dayBackgroundColor = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#dayNameLength}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>length_short</code></td><td>1</td><td></td></tr>
+<tr><td><code>length_long</code></td><td>2</td><td></td></tr>
+</table>
+          @attr name com.adarshhasija.ahelp:dayNameLength
+        */
+        public static final int WeekView_dayNameLength = 18;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#eventMarginVertical}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:eventMarginVertical
+        */
+        public static final int WeekView_eventMarginVertical = 20;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#eventPadding}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:eventPadding
+        */
+        public static final int WeekView_eventPadding = 16;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#eventTextColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:eventTextColor
+        */
+        public static final int WeekView_eventTextColor = 15;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#eventTextSize}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:eventTextSize
+        */
+        public static final int WeekView_eventTextSize = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#firstDayOfWeek}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>sunday</code></td><td>1</td><td></td></tr>
+<tr><td><code>monday</code></td><td>2</td><td></td></tr>
+<tr><td><code>tuesday</code></td><td>3</td><td></td></tr>
+<tr><td><code>wednesday</code></td><td>4</td><td></td></tr>
+<tr><td><code>thursday</code></td><td>5</td><td></td></tr>
+<tr><td><code>friday</code></td><td>6</td><td></td></tr>
+<tr><td><code>saturday</code></td><td>7</td><td></td></tr>
+</table>
+          @attr name com.adarshhasija.ahelp:firstDayOfWeek
+        */
+        public static final int WeekView_firstDayOfWeek = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#headerColumnBackground}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:headerColumnBackground
+        */
+        public static final int WeekView_headerColumnBackground = 17;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#headerColumnPadding}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:headerColumnPadding
+        */
+        public static final int WeekView_headerColumnPadding = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#headerColumnTextColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:headerColumnTextColor
+        */
+        public static final int WeekView_headerColumnTextColor = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#headerRowBackgroundColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:headerRowBackgroundColor
+        */
+        public static final int WeekView_headerRowBackgroundColor = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#headerRowPadding}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:headerRowPadding
+        */
+        public static final int WeekView_headerRowPadding = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#hourHeight}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:hourHeight
+        */
+        public static final int WeekView_hourHeight = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#hourSeparatorColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:hourSeparatorColor
+        */
+        public static final int WeekView_hourSeparatorColor = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#hourSeparatorHeight}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:hourSeparatorHeight
+        */
+        public static final int WeekView_hourSeparatorHeight = 14;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#noOfVisibleDays}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:noOfVisibleDays
+        */
+        public static final int WeekView_noOfVisibleDays = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#overlappingEventGap}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:overlappingEventGap
+        */
+        public static final int WeekView_overlappingEventGap = 19;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#textSize}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:textSize
+        */
+        public static final int WeekView_textSize = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#todayBackgroundColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:todayBackgroundColor
+        */
+        public static final int WeekView_todayBackgroundColor = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#todayHeaderTextColor}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:todayHeaderTextColor
+        */
+        public static final int WeekView_todayHeaderTextColor = 13;
+        /**
+          <p>This symbol is the offset where the {@link com.adarshhasija.ahelp.R.attr#xScrollingSpeed}
+          attribute's value can be found in the {@link #WeekView} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.adarshhasija.ahelp:xScrollingSpeed
+        */
+        public static final int WeekView_xScrollingSpeed = 21;
     };
 }

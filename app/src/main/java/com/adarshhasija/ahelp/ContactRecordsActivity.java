@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,9 +18,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class ContactRecordsActivity extends Activity {
 
@@ -27,8 +30,10 @@ public class ContactRecordsActivity extends Activity {
     private String mContactName;
     private String mContactNumber;
 
+    private Button buttonMonthYear;
     private ListView listView;
-    private TextView textViewEmpty;
+    private Button buttonNewRecord;
+    private TextView textViewNoRecords;
 
 
     /*
@@ -64,7 +69,7 @@ public class ContactRecordsActivity extends Activity {
                 RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
                 listView.setAdapter(recordAdapter);
                 listView.setVisibility(View.VISIBLE);
-                textViewEmpty.setVisibility(View.GONE);
+                buttonNewRecord.setVisibility(View.GONE);
             } else {
                 Log.d("ContactRecordsActivity", "Error: " + e.getMessage());
             }
@@ -87,13 +92,14 @@ public class ContactRecordsActivity extends Activity {
                 RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
                 listView.setAdapter(recordAdapter);
                 listView.setVisibility(View.VISIBLE);
-                textViewEmpty.setVisibility(View.GONE);
+                buttonNewRecord.setVisibility(View.GONE);
             } else {
                 Log.d("ContactRecordsActivity", "Error: " + e.getMessage());
             }
         }
 
     };
+
 
 
     /*
@@ -130,14 +136,58 @@ public class ContactRecordsActivity extends Activity {
         mContactId = extras.getString("id");
         mContactName = extras.getString("name");
         mContactNumber = extras.getString("number");
+
         setTitle(mContactName);
+        buttonMonthYear = (Button) findViewById(R.id.buttonMonthYear);
+        Calendar c = Calendar.getInstance();
+        buttonMonthYear.setText(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + c.get(Calendar.YEAR));
+        buttonMonthYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ContactRecordsActivity.this, MonthYearPickerActivity.class);
+                startActivityForResult(intent, 5000);
+            }
+        });
 
         listView = (ListView) findViewById(R.id.list);
-        textViewEmpty = (TextView) findViewById(R.id.textViewEmpty);
+        buttonNewRecord = (Button) findViewById(R.id.buttonNewRecord);
         listView.setVisibility(View.GONE);
-        textViewEmpty.setVisibility(View.VISIBLE);
+        buttonNewRecord.setVisibility(View.VISIBLE);
+        buttonNewRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ContactRecordsActivity.this, RecordEditActivity.class);
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", extras.getString("id"));
+                    bundle.putString("number", extras.getString("number"));
+                    bundle.putString("name", extras.getString("name"));
+                    bundle.putInt("month", extras.getInt("month"));
+                    bundle.putInt("year", extras.getInt("year"));
+                    intent.putExtras(bundle);
+                }
+                startActivityForResult(intent, 0);
+            }
+        });
 
-        populateList();
+        //populateList();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == 5000 && data != null) {
+            Bundle extras = data.getExtras();
+            int month = extras.getInt("month");
+            int year = extras.getInt("year");
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.MONTH, month);
+            c.set(Calendar.YEAR, year);
+            buttonMonthYear.setText(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + c.get(Calendar.YEAR));
+        }
     }
 
     @Override
@@ -157,6 +207,16 @@ public class ContactRecordsActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_new) {
             Intent intent = new Intent(this, RecordEditActivity.class);
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id", extras.getString("id"));
+                bundle.putString("number", extras.getString("number"));
+                bundle.putString("name", extras.getString("name"));
+                bundle.putInt("month", extras.getInt("month"));
+                bundle.putInt("year", extras.getInt("year"));
+                intent.putExtras(bundle);
+            }
             startActivityForResult(intent, 0);
 
             return true;

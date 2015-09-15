@@ -1,17 +1,16 @@
 package com.adarshhasija.ahelp;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class DatePickerActivity extends ListActivity {
 	
@@ -26,7 +25,6 @@ public class DatePickerActivity extends ListActivity {
 		int year = extras.getInt("year");
 		
 		dateTime = Calendar.getInstance();
-		//dateTime.set(Calendar.MONTH, month);
 		dateTime.add(Calendar.MONTH, (month - dateTime.get(Calendar.MONTH)));
 		dateTime.set(Calendar.YEAR, year);
 		

@@ -28,14 +28,12 @@ public class MainActivity extends Activity {
 		
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if(currentUser != null) {
-			//Intent intent = new Intent(this, MainListActivity.class);
-			Intent intent = new Intent(this, LocationAutocompleteActivity.class);
+			Intent intent = new Intent(this, MainListActivity.class);
 			startActivity(intent);
 			finish();						 	 
 		}
 		else {
-			//Intent intent = new Intent(this, Login.class);
-            Intent intent = new Intent(this, LocationAutocompleteActivity.class);
+			Intent intent = new Intent(this, Login.class);
 			startActivity(intent);
 			finish();
 		}	

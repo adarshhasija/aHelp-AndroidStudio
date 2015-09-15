@@ -324,14 +324,7 @@ public class MainListActivity extends ListActivity {
 			long id) {
 		super.onListItemClick(listView, view, position, id);
 
-		//Pass the ParseObject as a global variable
-		/*ParseObject record = (ParseObject) getListAdapter().getItem(position);
-		Intent intent = new Intent(this, MainDetailActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putString("parseId", record.getObjectId());
-		bundle.putString("uuid", record.getString("uuid"));
-		intent.putExtras(bundle);
-		startActivityForResult(intent, position);   */
+		//Intent intent = new Intent(this, MainDetailActivity.class);
         Contact contact = (Contact) getListAdapter().getItem(position);
         Intent intent = new Intent(this, ContactRecordsActivity.class);
         Bundle bundle = new Bundle();

@@ -126,6 +126,7 @@
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
     <declare-styleable name="WalletFragmentOptions"><attr format="enum" name="appTheme"><enum name="holo_dark" value="0"/><enum name="holo_light" value="1"/></attr><attr format="enum" name="environment"><enum name="production" value="1"/><enum name="sandbox" value="0"/><enum name="strict_sandbox" value="2"/></attr><attr format="reference" name="fragmentStyle"/><attr format="enum" name="fragmentMode"><enum name="buyButton" value="1"/><enum name="selectionDetails" value="2"/></attr></declare-styleable>
     <declare-styleable name="WalletFragmentStyle"><attr format="dimension" name="buyButtonHeight"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="dimension" name="buyButtonWidth"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="enum" name="buyButtonText"><enum name="buy_with_google" value="1"/><enum name="buy_now" value="2"/><enum name="book_now" value="3"/><enum name="donate_with_google" value="4"/></attr><attr format="enum" name="buyButtonAppearance"><enum name="classic" value="1"/><enum name="grayscale" value="2"/><enum name="monochrome" value="3"/></attr><attr format="reference" name="maskedWalletDetailsTextAppearance"/><attr format="reference" name="maskedWalletDetailsHeaderTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsBackground"/><attr format="reference" name="maskedWalletDetailsButtonTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsButtonBackground"/><attr format="color" name="maskedWalletDetailsLogoTextColor"/><attr format="enum" name="maskedWalletDetailsLogoImageType"><enum name="classic" value="1"/><enum name="monochrome" value="2"/></attr></declare-styleable>
+    <declare-styleable name="WeekView"><attr format="enum" name="firstDayOfWeek"><enum name="sunday" value="1"/><enum name="monday" value="2"/><enum name="tuesday" value="3"/><enum name="wednesday" value="4"/><enum name="thursday" value="5"/><enum name="friday" value="6"/><enum name="saturday" value="7"/></attr><attr format="dimension" name="hourHeight"/><attr format="dimension" name="textSize"/><attr format="dimension" name="eventTextSize"/><attr format="dimension" name="headerColumnPadding"/><attr format="dimension" name="headerRowPadding"/><attr format="dimension" name="columnGap"/><attr format="color" name="headerColumnTextColor"/><attr format="integer" name="noOfVisibleDays"/><attr format="color" name="headerRowBackgroundColor"/><attr format="color" name="dayBackgroundColor"/><attr format="color" name="hourSeparatorColor"/><attr format="color" name="todayBackgroundColor"/><attr format="color" name="todayHeaderTextColor"/><attr format="dimension" name="hourSeparatorHeight"/><attr format="color" name="eventTextColor"/><attr format="dimension" name="eventPadding"/><attr format="color" name="headerColumnBackground"/><attr format="enum" name="dayNameLength"><enum name="length_short" value="1"/><enum name="length_long" value="2"/></attr><attr format="dimension" name="overlappingEventGap"/><attr format="dimension" name="eventMarginVertical"/><attr format="float" name="xScrollingSpeed"/></declare-styleable>
     <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -238,9 +239,11 @@
     <string name="amount">Amount</string>
     <string name="app_name">aScribe</string>
     <string name="archives">Archives</string>
+    <string name="autocomplete_hint">Type here</string>
     <string name="bank_details">Bank details</string>
     <string name="cancel">Cancel</string>
     <string name="category">Category(eg: books)</string>
+    <string name="change_date_button">Change date button</string>
     <string name="changes">Changes</string>
     <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/res/values/common_strings.xml -->
     <eat-comment/>
@@ -310,6 +313,7 @@ available. Please contact the developer for assistance.</string>
     <string name="new_location">New location</string>
     <string name="new_record">New Record</string>
     <string name="new_user">New User?</string>
+    <string name="no_records">NO RECORDS TO SHOW</string>
     <string name="no_records_to_show">No records to show</string>
     <string name="notes">Notes. eg: Student name, student number</string>
     <string name="ok">OK</string>
