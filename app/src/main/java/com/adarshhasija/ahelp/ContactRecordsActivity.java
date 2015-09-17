@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,9 +19,9 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,13 +31,14 @@ public class ContactRecordsActivity extends Activity {
     private String mContactName;
     private String mContactNumber;
 
-    private int month;
-    private int year;
+    private Calendar mCalendar = Calendar.getInstance();
 
     private Button buttonMonthYear;
     private ListView listView;
     private Button buttonNewRecord;
     private TextView textViewNoRecords;
+
+    MenuItem addMenuItem;
 
 
     /*
@@ -48,14 +50,7 @@ public class ContactRecordsActivity extends Activity {
         @Override
         public void done(final List<ParseObject> list, ParseException e) {
             if (e == null) {
-                if(list.size() == 0) {
-                    ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
-                    if(cm.getActiveNetworkInfo() != null) {
-                        populateListCloud();
-                    }
-                    return;
-                }
-                Collections.sort(list, new Comparator<ParseObject>() {
+             /*   Collections.sort(list, new Comparator<ParseObject>() {
                     public int compare(ParseObject o1, ParseObject o2) {
                         if (o2.getUpdatedAt() == null)
                             if (o1.getUpdatedAt() == null)
@@ -68,11 +63,18 @@ public class ContactRecordsActivity extends Activity {
                             else
                                 return o2.getUpdatedAt().compareTo(o1.getUpdatedAt()); //descending
                     }
-                });
+                }); */
                 RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
                 listView.setAdapter(recordAdapter);
-                listView.setVisibility(View.VISIBLE);
-                buttonNewRecord.setVisibility(View.GONE);
+
+                if(list.size() == 0) {
+                    ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+                    if(cm.getActiveNetworkInfo() != null) {
+                        populateListCloud();
+                    }
+                    listView.setVisibility(View.GONE);
+                    buttonNewRecord.setVisibility(View.VISIBLE);
+                }
             } else {
                 Log.d("ContactRecordsActivity", "Error: " + e.getMessage());
             }
@@ -85,17 +87,23 @@ public class ContactRecordsActivity extends Activity {
         @Override
         public void done(List<ParseObject> list, ParseException e) {
             if (e == null) {
-                Collections.sort(list, new Comparator<ParseObject>() {
-                    public int compare(ParseObject o1, ParseObject o2) {
-                        return o2.getUpdatedAt().compareTo(o1.getUpdatedAt()); //descending
-                    }
-                });
-                ParseObject.pinAllInBackground("Record", list);
+                if (list.size() > 0) {
+                  /*  Collections.sort(list, new Comparator<ParseObject>() {
+                        public int compare(ParseObject o1, ParseObject o2) {
+                            return o2.getUpdatedAt().compareTo(o1.getUpdatedAt()); //descending
+                        }
+                    }); */
+                    ParseObject.pinAllInBackground("ScribeRecord", list);
 
-                RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
-                listView.setAdapter(recordAdapter);
-                listView.setVisibility(View.VISIBLE);
-                buttonNewRecord.setVisibility(View.GONE);
+                    RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
+                    listView.setAdapter(recordAdapter);
+                    listView.setVisibility(View.VISIBLE);
+                    buttonNewRecord.setVisibility(View.GONE);
+                }
+                else {
+                    listView.setVisibility(View.GONE);
+                    buttonNewRecord.setVisibility(View.VISIBLE);
+                }
             } else {
                 Log.d("ContactRecordsActivity", "Error: " + e.getMessage());
             }
@@ -119,15 +127,75 @@ public class ContactRecordsActivity extends Activity {
     }
 
     private void populateListLocal() {
-        ParseQuery<ParseObject> localQuery = ParseQuery.getQuery("Record");
-        localQuery.fromLocalDatastore();
-        localQuery.findInBackground(populateListCallbackLocal);
+        Bundle extras = getIntent().getExtras();
+
+        //ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRecord");
+        //query.fromLocalDatastore();
+        //query.addAscendingOrder("dateTime");
+
+        ParseQuery<ParseObject> queryStudent = ParseQuery.getQuery("ScribeRecord");
+        queryStudent.whereEqualTo("studentId", extras.getString("id"));
+
+        ParseQuery<ParseObject> queryScribe = ParseQuery.getQuery("ScribeRecord");
+        queryScribe.whereEqualTo("scribeId", extras.getString("id"));
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(queryStudent);
+        queries.add(queryScribe);
+
+        ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
+        mainQuery.fromLocalDatastore();
+        mainQuery.addAscendingOrder("dateTime");
+
+        mainQuery.findInBackground(populateListCallbackLocal);
     }
 
     private void populateListCloud() {
-        ParseQuery<ParseObject> cloudQuery = ParseQuery.getQuery("Record");
-        cloudQuery.whereEqualTo("user", ParseUser.getCurrentUser());
-        cloudQuery.findInBackground(populateListCallbackCloud);
+        Bundle extras = getIntent().getExtras();
+
+        //ParseQuery<ParseObject> cloudQuery = ParseQuery.getQuery("ScribeRecord");
+        //cloudQuery.whereEqualTo("user", ParseUser.getCurrentUser());
+        //cloudQuery.whereEqualTo("studentId", extras.getString("id"));
+        //cloudQuery.addAscendingOrder("dateTime");
+
+        ParseQuery<ParseObject> queryStudent = ParseQuery.getQuery("ScribeRecord");
+        queryStudent.whereEqualTo("studentId", extras.getString("id"));
+
+        ParseQuery<ParseObject> queryScribe = ParseQuery.getQuery("ScribeRecord");
+        queryScribe.whereEqualTo("scribeId", extras.getString("id"));
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(queryStudent);
+        queries.add(queryScribe);
+
+        ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
+        mainQuery.fromLocalDatastore();
+        mainQuery.whereEqualTo("user", ParseUser.getCurrentUser());
+        mainQuery.addAscendingOrder("dateTime");
+
+        mainQuery.findInBackground(populateListCallbackCloud);
+    }
+
+
+    private int getInsertIndex(Date newDate) {
+        RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
+        int size = adapter.getCount();
+        int start = 0;
+        int end = size - 1;
+        while (start <= end) {
+            int mid = (start + end)/2;
+            ParseObject tmp = adapter.getItem(mid);
+            if (0 == newDate.compareTo(tmp.getDate("dateTime"))) {
+                return mid;
+            }
+            else if (-1 == newDate.compareTo(tmp.getDate("dateTime"))) {
+                end = mid -1;
+            }
+            else {
+                start = mid + 1;
+            }
+        }
+        return start;
     }
 
     @Override
@@ -142,10 +210,7 @@ public class ContactRecordsActivity extends Activity {
 
         setTitle(mContactName);
         buttonMonthYear = (Button) findViewById(R.id.buttonMonthYear);
-        Calendar c = Calendar.getInstance();
-        month = c.get(Calendar.MONTH);
-        year = c.get(Calendar.YEAR);
-        buttonMonthYear.setText(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + c.get(Calendar.YEAR));
+        buttonMonthYear.setText(mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + mCalendar.get(Calendar.YEAR));
         buttonMonthYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,9 +220,21 @@ public class ContactRecordsActivity extends Activity {
         });
 
         listView = (ListView) findViewById(R.id.list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
+                ParseObject record = adapter.getItem(position);
+                Intent intent = new Intent(ContactRecordsActivity.this, RecordEditActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("parseId", record.getObjectId());
+                bundle.putString("uuid", record.getString("uuid"));
+                intent.putExtras(bundle);
+                startActivityForResult(intent, position);
+            }
+        });
         buttonNewRecord = (Button) findViewById(R.id.buttonNewRecord);
-        listView.setVisibility(View.GONE);
-        buttonNewRecord.setVisibility(View.VISIBLE);
+        textViewNoRecords = (TextView) findViewById(R.id.textViewNoRecords);
         buttonNewRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,30 +245,78 @@ public class ContactRecordsActivity extends Activity {
                     bundle.putString("id", extras.getString("id"));
                     bundle.putString("number", extras.getString("number"));
                     bundle.putString("name", extras.getString("name"));
-                    bundle.putInt("month", month);
-                    bundle.putInt("year", year);
+                    bundle.putInt("month", mCalendar.get(Calendar.MONTH));
+                    bundle.putInt("year", mCalendar.get(Calendar.YEAR));
                     intent.putExtras(bundle);
                 }
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, 1000);
             }
         });
 
-        //populateList();
+        populateList();
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+Log.d("HELLO", "**************"+requestCode+"**********"+resultCode+"*********"+data);
         if (resultCode == Activity.RESULT_OK && requestCode == 5000 && data != null) {
+            //Month/year changed
             Bundle extras = data.getExtras();
-            month = extras.getInt("month");
-            year = extras.getInt("year");
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.MONTH, month);
-            c.set(Calendar.YEAR, year);
-            buttonMonthYear.setText(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + c.get(Calendar.YEAR));
+            int month = extras.getInt("month");
+            int year = extras.getInt("year");
+            mCalendar.set(Calendar.MONTH, month);
+            mCalendar.set(Calendar.YEAR, year);
+            buttonMonthYear.setText(mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + mCalendar.get(Calendar.YEAR));
+            populateList();
+        }
+
+        else if (resultCode == Activity.RESULT_OK && requestCode == 1000 && data != null) {
+            //new record added
+            Log.d("HELLO", "**********ONE***********");
+            Bundle extras = data.getExtras();
+            String uuid = extras.getString("uuid");
+            Log.d("HELLO", "***************"+uuid+"****************");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRecord");
+            query.fromLocalDatastore();
+            query.whereEqualTo("uuid", uuid);
+            try {
+                ParseObject record = query.getFirst();
+                Log.d("HELLO", "**********TWO*************");
+                int index = getInsertIndex(record.getDate("dateTime"));
+                Log.d("HELLO", "*************"+index+"**************");
+                RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
+                adapter.insert(record, index);
+                adapter.notifyDataSetChanged();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (resultCode == Activity.RESULT_OK && data != null) {
+            //existing record modified
+            Bundle extras = data.getExtras();
+            String uuid = extras.getString("uuid");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRequest");
+            query.fromLocalDatastore();
+            query.whereEqualTo("uuid", uuid);
+            try {
+                ParseObject record = query.getFirst();
+                RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
+                adapter.remove(adapter.getItem(requestCode));
+                adapter.insert(record, requestCode);
+                adapter.notifyDataSetChanged();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (requestCode > 0 && resultCode == Activity.RESULT_OK) {
+            //Activity result is ok but data == null...this means record has been deleted
+            RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
+            adapter.remove(adapter.getItem(requestCode));
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -199,6 +324,8 @@ public class ContactRecordsActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_contact_records, menu);
+        addMenuItem = (MenuItem) menu.findItem(R.id.action_new);
+
         return true;
     }
 
@@ -218,11 +345,11 @@ public class ContactRecordsActivity extends Activity {
                 bundle.putString("id", extras.getString("id"));
                 bundle.putString("number", extras.getString("number"));
                 bundle.putString("name", extras.getString("name"));
-                bundle.putInt("month", month);
-                bundle.putInt("year", year);
+                bundle.putInt("month", mCalendar.get(Calendar.MONTH));
+                bundle.putInt("year", mCalendar.get(Calendar.YEAR));
                 intent.putExtras(bundle);
             }
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, 1000);
 
             return true;
         }

@@ -17,7 +17,8 @@
         android:background="#FF0000FF"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/new_record" />
+        android:text="@string/new_record"
+        android:visibility="gone" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +50,8 @@
            android:layout_height="fill_parent"
            android:id="@+id/list"
            android:layout_centerVertical="true"
-           android:layout_centerHorizontal="true" />
+           android:layout_centerHorizontal="true"
+            android:visibility="visible" />
     </LinearLayout>
 
 

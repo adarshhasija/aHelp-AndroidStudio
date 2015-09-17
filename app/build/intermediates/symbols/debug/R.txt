@@ -584,7 +584,6 @@ int id never 0x7f0e001f
 int id none 0x7f0e000e
 int id normal 0x7f0e000a
 int id notes 0x7f0e006d
-int id other_person 0x7f0e0087
 int id password 0x7f0e007d
 int id password_confirm 0x7f0e0093
 int id phoneNumber 0x7f0e006e
@@ -610,6 +609,7 @@ int id sandbox 0x7f0e0027
 int id satellite 0x7f0e001a
 int id saturday 0x7f0e0035
 int id save 0x7f0e009c
+int id scribe 0x7f0e0087
 int id search 0x7f0e0099
 int id search_badge 0x7f0e0053
 int id search_bar 0x7f0e0052

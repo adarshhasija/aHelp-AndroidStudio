@@ -38,10 +38,10 @@ public class DatePickerActivity extends ListActivity {
 			c.add(Calendar.MINUTE, 15);  //We are going to set it to the next day
 		}	*/
         int start = 1;
-        if(month == c.get(Calendar.MONTH) &&
+       /* if(month == c.get(Calendar.MONTH) &&
                 year == c.get(Calendar.YEAR)) {
                 start = c.get(Calendar.DAY_OF_MONTH);
-        }
+        }   */
         int end = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         for(int i=start; i < end+1; i++) {
             list.add(Integer.toString(i));
@@ -64,9 +64,12 @@ public class DatePickerActivity extends ListActivity {
         bundle.putInt("month", dateTime.get(Calendar.MONTH));
         bundle.putInt("year", dateTime.get(Calendar.YEAR));
 
-        Intent intent = new Intent(this,TimePickerActivity.class);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, position);
+        //Intent intent = new Intent(this,TimePickerActivity.class);
+		Intent returnIntent = new Intent();
+        returnIntent.putExtras(bundle);
+        //startActivityForResult(intent, position);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="record_row_height">120dp</dimen>
+    <dimen name="record_row_height">160dp</dimen>
     <dimen name="record_detail_content_height">120dp</dimen>
     <dimen name="com_parse_ui_horizontal_margin">16dp</dimen>
     <dimen name="com_parse_ui_vertical_margin">16dp</dimen>

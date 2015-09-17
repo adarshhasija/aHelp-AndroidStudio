@@ -29,7 +29,8 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 	    TextView userView;
         TextView locationView;
 	    TextView subjectView;
-        TextView otherPersonView;
+        TextView studentView;
+        TextView scribeView;
 	    TextView dateTimeView;
 	    TextView lastActionView;
 	    TextView updatedAtDateView;
@@ -229,6 +230,11 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 	}
 
 	@Override
+	public ParseObject getItem(int position) {
+		return recordList.get(position);
+	}
+
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		ViewHolderRecord viewHolder;
@@ -243,7 +249,8 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 			viewHolder.userView = (TextView) convertView.findViewById(R.id.user);
             viewHolder.locationView = (TextView) convertView.findViewById(R.id.location);
 			viewHolder.subjectView = (TextView) convertView.findViewById(R.id.subject);
-            viewHolder.otherPersonView = (TextView) convertView.findViewById(R.id.other_person);
+            viewHolder.studentView = (TextView) convertView.findViewById(R.id.student);
+            viewHolder.scribeView = (TextView) convertView.findViewById(R.id.scribe);
 			viewHolder.lastActionView = (TextView) convertView.findViewById(R.id.lastAction);
 			viewHolder.dateTimeView = (TextView) convertView.findViewById(R.id.recordDateTime);
 			viewHolder.updatedAtDateView = (TextView) convertView.findViewById(R.id.updatedAtDate);
@@ -260,9 +267,13 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 			String recordDateTime = getDateValueAsString(record.getDate("dateTime"));
             String placeName = record.getString("placeName");
             String subject = record.getString("subject");
+            String studentName = record.getString("studentName");
+            String scribeName = record.getString("scribeName");
 			viewHolder.dateTimeView.setText(recordDateTime);
             viewHolder.locationView.setText(placeName);
             viewHolder.subjectView.setText(subject);
+            viewHolder.studentView.setText("Student: " + studentName);
+			viewHolder.scribeView.setText("Scribe: " + scribeName);
 
 			
 			if(record.getObjectId() != null) {

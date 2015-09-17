@@ -2051,7 +2051,6 @@ containing a value of this type.
         public static final int none=0x7f0e000e;
         public static final int normal=0x7f0e000a;
         public static final int notes=0x7f0e006d;
-        public static final int other_person=0x7f0e0087;
         public static final int password=0x7f0e007d;
         public static final int password_confirm=0x7f0e0093;
         public static final int phoneNumber=0x7f0e006e;
@@ -2077,6 +2076,7 @@ containing a value of this type.
         public static final int satellite=0x7f0e001a;
         public static final int saturday=0x7f0e0035;
         public static final int save=0x7f0e009c;
+        public static final int scribe=0x7f0e0087;
         public static final int search=0x7f0e0099;
         public static final int search_badge=0x7f0e0053;
         public static final int search_bar=0x7f0e0052;

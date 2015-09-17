@@ -193,7 +193,7 @@
     <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="record_detail_content_height">120dp</dimen>
-    <dimen name="record_row_height">120dp</dimen>
+    <dimen name="record_row_height">160dp</dimen>
     <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>

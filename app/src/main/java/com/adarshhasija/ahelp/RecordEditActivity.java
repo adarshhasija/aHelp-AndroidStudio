@@ -1,16 +1,18 @@
 package com.adarshhasija.ahelp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -26,10 +28,12 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class RecordEditActivity extends ListActivity { //extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-	
-	private MainApplication mainApplication;
+
 	private ParseObject scribeRecord=null;
-	
+
+	private String studentId=null;
+	private String studentName = null;
+	private String studentNumber = null;
 	private Calendar dateTime = Calendar.getInstance();
 	//This is the reference to the currently selected location
 	private String placeId=null;
@@ -46,8 +50,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
     private String scribeNumber=null;
 	
 	//MenuItems
-	private MenuItem progressButton;
-	private MenuItem nextButton;
+	private MenuItem discardButton;
 	private MenuItem saveButton;
 	
 	/*
@@ -113,45 +116,10 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
     	if(!validate()) {
     		return;
     	}
-    /*	ParseObject oldScribeRequest = oldScribeRequestSetup(scribeRequest);
-    	ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRequest");
-    	query.fromLocalDatastore();
-    	try {
-    		updateScribeRequest();
-    		Log.d("WOW", "****************TWO****************");
-    		//scribeRequest.add("actions", action);
-    		List<ParseObject> list = scribeRequest.getList("actions");
-    		list.add(action);
-    		scribeRequest.remove("actions");
-    		scribeRequest.put("actions", list);
-    		
-    		
-    		Log.d("WOW", "****************SECOND*********************");
-    		ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+    /*	ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
     		if(cm.getActiveNetworkInfo() != null) {
-    			Log.d("WOW", "*****************THIRD*******************");
-				scribeRequest.pinInBackground();
-				toggleProgressButton();
-				scribeRequest.saveInBackground(saveCallback);
-			}
-			else {
-				scribeRequest.remove("isDraft");
-				scribeRequest.put("isDraft", true);
-				scribeRequest.pinInBackground();
-				
-				Bundle bundle = new Bundle();
-				bundle.putString("parseId", scribeRequest.getObjectId());
-				bundle.putString("uuid", scribeRequest.getString("uuid"));
-				Intent returnIntent = new Intent();
-				returnIntent.putExtras(bundle);
-				setResult(Activity.RESULT_OK, returnIntent);
-				finish();
-			}		
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}   */
+
+			} */
 
         if (scribeRecord == null) {
             scribeRecord = new ParseObject("ScribeRecord");
@@ -160,12 +128,16 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
             recordAcl.setReadAccess(ParseUser.getCurrentUser(), true);
             recordAcl.setWriteAccess(ParseUser.getCurrentUser(), true);
             scribeRecord.setACL(recordAcl);
+			scribeRecord.put("user", ParseUser.getCurrentUser());
+
+			scribeRecord.put("studentId", studentId);
+			scribeRecord.put("studentName", studentName);
+			scribeRecord.put("studentNumber", studentNumber);
         }
 
-        long dateTimeMillis = dateTime.getTimeInMillis();
-        Calendar dateTime = Calendar.getInstance();
-        dateTime.setTimeInMillis(dateTimeMillis);
-        Date finalDate = dateTime.getTime();
+        //long dateTimeMillis = dateTime.getTimeInMillis();
+        //Calendar dateTime = Calendar.getInstance();
+        //dateTime.setTimeInMillis(dateTimeMillis);
         scribeRecord.put("dateTime", dateTime.getTime());
         scribeRecord.put("placeId", placeId);
         scribeRecord.put("placeName", placeName);
@@ -173,12 +145,41 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
         scribeRecord.put("placePhoneNumber", placePhoneNumber);
         scribeRecord.put("latitude", latitude);
         scribeRecord.put("longitude", longitude);
+		scribeRecord.put("subject", subjectString);
         scribeRecord.put("scribeId", scribeId);
         scribeRecord.put("scribeName", scribeName);
         scribeRecord.put("scribeNumber", scribeNumber);
         scribeRecord.saveEventually();
-        scribeRecord.pinInBackground(saveCallback);
+        scribeRecord.pinInBackground("ScribeRecord", saveCallback);
     }
+
+	private void discardPressed() {
+		new AlertDialog.Builder(RecordEditActivity.this)
+				.setTitle("Are you sure?")
+				.setMessage("This cannot be undone")
+				.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						if (scribeRecord != null) {
+							scribeRecord.deleteEventually();
+							scribeRecord.unpinInBackground("ScribeRecord", new DeleteCallback() {
+								@Override
+								public void done(ParseException e) {
+									setResult(Activity.RESULT_OK, null);
+									finish();
+								}
+							});
+						}
+					}
+				})
+				.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						//do nothing
+					}
+				})
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.show();
+	}
     
     /*
      * Private functions
@@ -187,10 +188,10 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
     private boolean validate()
     {
 		Calendar c = Calendar.getInstance();
-		if(dateTime.getTime().compareTo(c.getTime()) < 0) {
+	/*	if(dateTime.getTime().compareTo(c.getTime()) < 0) {
 			Toast.makeText(getBaseContext(), "You must enter a date and time that is in the future", Toast.LENGTH_SHORT).show();
 			return false;
-		}
+		}	*/
 
 		
 		if(placeName == null) {
@@ -214,6 +215,9 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
     
     private void setupPrivateVariables(ParseObject input)
     {
+		studentId = null;
+		studentName = null;
+		studentNumber = null;
     	dateTime = null;
         placeId=null;
         placeName=null;
@@ -225,7 +229,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
         scribeId=null;
         scribeName=null;
         scribeNumber=null;
-		
+
 		Date date = input.getDate("dateTime");
 		dateTime = Calendar.getInstance();
 		dateTime.setTime(date);
@@ -235,6 +239,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		placePhoneNumber = input.getString("placePhoneNumber");
         latitude = input.getDouble("latitude");
         longitude = input.getDouble("longitude");
+		subjectString = input.getString("subject");
 		scribeId = input.getString("scribeId");
 		scribeName = input.getString("scribeName");
 		scribeNumber = input.getString("scribeNumber");
@@ -286,7 +291,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
             locationString = input.getString("placeName");
             subjectString = input.getString("subject");
             if (input.getString("scribeName") != null) {
-                scribeString = input.getString("scribeString");
+                scribeString = input.getString("scribeName");
             }
     	}
     	else {
@@ -322,28 +327,6 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		
 		return content;
     }
-
-	/*
-	 * Picker dialog set listeners
-	 * 
-	 * 
-	 */
-	private AdapterView.OnItemClickListener itemClickedListener = new AdapterView.OnItemClickListener() {
-
-	      @Override
-	      public void onItemClick(AdapterView<?> parent, final View view,
-	          int position, long id) {
-	    	  switch (position) {
-		        case 0:
-		        	Intent intent = new Intent(RecordEditActivity.this, MonthYearPickerActivity.class);
-					startActivityForResult(intent, position);
-		            return;
-		        default:
-		            return;
-		    }
-	      }
-
-	    };
 	
 	
       
@@ -353,11 +336,16 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.record_edit_activity);
 
-		mainApplication = (MainApplication) getBaseContext().getApplicationContext();
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			studentId = extras.getString("id");
+			studentName = extras.getString("name");
+			studentNumber = extras.getString("number");
+		}
+
 		String parseId=null;
 		String uuid=null;
 
-		Bundle extras = getIntent().getExtras();
 		if(extras != null) {
 			parseId = extras.getString("parseId");
 			uuid = extras.getString("uuid");
@@ -461,7 +449,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 					dateTime.set(Calendar.HOUR_OF_DAY, extras.getInt("hourOfDay"));
 					dateTime.set(Calendar.MINUTE, extras.getInt("minute"));
 					
-					String monthString = dateTime.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
+				/*	String monthString = dateTime.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
 					int hourOfDay = dateTime.get(Calendar.HOUR_OF_DAY);
 					if(hourOfDay > 12) hourOfDay = hourOfDay - 12;
 			        else if(hourOfDay == 0) hourOfDay = 12;
@@ -473,10 +461,10 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 			        
 					String am_pm = dateTime.getDisplayName(Calendar.AM_PM, Calendar.LONG, Locale.US);
 					String dateTimeString = dateTime.get(Calendar.DAY_OF_MONTH) + " " + monthString + " " + dateTime.get(Calendar.YEAR) +
-											"  " + hourOfDay + ":" + minuteString + " " + am_pm;
+											"  " + hourOfDay + ":" + minuteString + " " + am_pm;    */
 					
 					adapter.remove(adapter.getItem(0));
-					adapter.insert(dateTimeString, 0);
+					adapter.insert(dateTimeFormatted(dateTime.getTime()), 0);
 					adapter.notifyDataSetChanged();
 					return;
 				case 1:
@@ -551,6 +539,9 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 	        		e.printStackTrace();
 	        	}
 	        	return true;
+			case R.id.discard:
+				discardPressed();
+				return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -567,6 +558,14 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 		//progressButton.setVisible(false);
 
 		saveButton = (MenuItem)menu.findItem(R.id.save);
+		discardButton = (MenuItem)menu.findItem(R.id.discard);
+
+		if(scribeRecord != null) {
+			discardButton.setVisible(true);
+		}
+		else {
+			discardButton.setVisible(false);
+		}
 		
 		return super.onCreateOptionsMenu(menu);
 	}

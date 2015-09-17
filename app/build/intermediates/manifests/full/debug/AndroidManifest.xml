@@ -21,11 +21,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
+    <!--
     <permission
         android:name="com.adarshhasija.ahelp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.adarshhasija.ahelp.permission.C2D_MESSAGE" />
+    -->
+
 
     <!--
      The ACCESS_COARSE/FINE_LOCATION permissions are not required to use

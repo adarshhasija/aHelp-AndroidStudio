@@ -161,16 +161,6 @@ uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
 ADDED from AndroidManifest.xml:22:5
 	android:name
 		ADDED from AndroidManifest.xml:22:22
-permission#com.adarshhasija.ahelp.permission.C2D_MESSAGE
-ADDED from AndroidManifest.xml:24:5
-	android:protectionLevel
-		ADDED from AndroidManifest.xml:26:9
-	android:name
-		ADDED from AndroidManifest.xml:25:9
-uses-permission#com.adarshhasija.ahelp.permission.C2D_MESSAGE
-ADDED from AndroidManifest.xml:28:5
-	android:name
-		ADDED from AndroidManifest.xml:28:22
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from AndroidManifest.xml:34:5
 	android:name
