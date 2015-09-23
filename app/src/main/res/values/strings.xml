@@ -14,11 +14,11 @@
     <string name="hint_enter_location">Enter Location</string>
     <string name="representing_someone">Representing Someone</string>
     
-    <string name="scribe_request">Scribe Request</string>
+    <string name="add_record_button">Add record button</string>
     <string name="new_location">New location</string>
     <string name="location_details">Location Details</string>
     <string name="title_record_detail">Record Detail</string>
-    <string name="search_title">Search</string>
+    <string name="search_title">Search button</string>
     <string name="search_hint">Enter name</string>
     <string name="search_results">Search Results</string>
     <string name="save">Save</string>
@@ -86,10 +86,19 @@
     <string name="title_activity_enter_location_string">EnterLocationStringActivity</string>
     <string name="title_activity_select_scribe">SelectScribeActivity</string>
     <string name="title_activity_location_autocomplete">Location</string>
+    <string name="title_activity_main_list">All Contacts</string>
 
     <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
     <string name="autocomplete_hint">Type here</string>
     <string name="change_date_button">Change date button</string>
     <string name="no_records">NO RECORDS TO SHOW</string>
+    <string name="new_contact">New Contact</string>
+    <string name="call_scribe_button">call scribe button</string>
+    <string name="call_scribe">Call Scribe</string>
+
+    <string name="add_person">Add person button</string>
+    <string name="refresh">Refresh button</string>
+    <string name="call_person">Call person button</string>
+
 
 </resources>

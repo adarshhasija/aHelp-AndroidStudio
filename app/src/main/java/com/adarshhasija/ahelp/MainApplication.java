@@ -7,9 +7,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.PushService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,12 +14,6 @@ import java.util.List;
 
 public class MainApplication extends Application{
 
-
-	private ParseObject parseObject=null;
-	private ParseObject selectedRecord=null; //This is to move selected objects forward from the main list as PO is not parcelable
-	private ParseObject modifiedRecord=null; //This is to move modified objects back to the main list as PO is not parcelable
-	private ParseUser userForNewRecord=null; //This is to pass a contact forward for creating a new record
-	
 	/*
 	 * Helper functions
 	 * 
@@ -94,43 +85,7 @@ public class MainApplication extends Application{
 	}
 */
 	
-	
-	/*
-	 * 
-	 * Getters and setters
-	 * 
-	 */
-	public ParseObject getParseObject() {
-		return parseObject;
-	}
-	public void setParseObject(ParseObject parseObject) {
-		this.parseObject = parseObject;
-	}
-	
-	public ParseObject getSelectedRecord() {
-		return selectedRecord;
-	}
 
-	public void setSelectedRecord(ParseObject selectedRecord) {
-		this.selectedRecord = selectedRecord;
-	}
-
-
-	public ParseObject getModifiedRecord() {
-		return modifiedRecord;
-	}
-
-	public void setModifiedRecord(ParseObject modifiedRecord) {
-		this.modifiedRecord = modifiedRecord;
-	}
-	
-	public ParseUser getUserForNewRecord() {
-		return userForNewRecord;
-	}
-
-	public void setUserForNewRecord(ParseUser userForNewRecord) {
-		this.userForNewRecord = userForNewRecord;
-	}
 	
 	
 	@Override
@@ -141,7 +96,7 @@ public class MainApplication extends Application{
 		ParseACL defaultACL = new ParseACL();
 		ParseACL.setDefaultACL(defaultACL, true);
 
-		PushService.setDefaultPushCallback(this, RecordListActivity.class);
+		//PushService.setDefaultPushCallback(this, RecordListActivity.class);
 	}
 	
 }

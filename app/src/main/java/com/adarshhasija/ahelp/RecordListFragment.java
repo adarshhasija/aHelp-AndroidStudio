@@ -466,7 +466,6 @@ public class RecordListFragment extends ListFragment {
 
 		//Pass the ParseObject as a global variable
 		MainApplication mainApplication = (MainApplication) getActivity().getApplicationContext();
-		mainApplication.setSelectedRecord((ParseObject) getListAdapter().getItem(position));
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
 		ParseObject record = (ParseObject) getListAdapter().getItem(position);

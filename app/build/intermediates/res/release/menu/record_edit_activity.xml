@@ -1,0 +1,23 @@
+
+    
+    
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <!--<item android:id="@+id/progress"
+          android:showAsAction="ifRoom" />-->
+
+        <item android:id="@+id/save"
+            android:icon="@drawable/ic_action_save"
+            android:title="Save"
+            android:showAsAction="ifRoom" />
+        
+        <item android:id="@+id/discard"
+          android:icon="@drawable/ic_action_discard"
+          android:title="Delete"
+          android:showAsAction="ifRoom" />-->
+
+        
+    </menu>
+
+
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/record_edit_activity.xml -->

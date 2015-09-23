@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -137,9 +136,9 @@ public class Signup extends AccountAuthenticatorActivity {
 			progressButton.setVisible(true);
 			
 			//Create a new installation object for push notifications
-			ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-			installation.put("phoneNumber", phoneNumber);
-			installation.saveInBackground();
+			//ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+			//installation.put("phoneNumber", phoneNumber);
+			//installation.saveInBackground();
 			
 			final ParseUser user = new ParseUser();
 			user.setUsername(userName);

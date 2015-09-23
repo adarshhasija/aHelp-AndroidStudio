@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
 public class MainActivity extends Activity {
@@ -25,6 +26,8 @@ public class MainActivity extends Activity {
 		//ParseObject.unpinAllInBackground("ScribeRequestSubject");
 		//ParseObject.unpinAllInBackground("ScribeRequestLocation");
 		//ParseObject.unpinAllInBackground("ScribeRequest");
+
+		ParseAnalytics.trackAppOpenedInBackground(getIntent());
 		
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if(currentUser != null) {

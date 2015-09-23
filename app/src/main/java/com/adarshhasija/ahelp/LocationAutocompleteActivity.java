@@ -146,6 +146,12 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
                     }
                     LargeHeightSimpleArrayAdapter adapter = new LargeHeightSimpleArrayAdapter(getApplicationContext(), 0, tmpList);
                     listView.setAdapter(adapter);
+                    if (list.size() == 0) {
+                        Toast.makeText(getBaseContext(), "Type in the textfield to get a location", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getBaseContext(), "Type in the textfield or choose from below options", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
                     e.printStackTrace();
@@ -237,33 +243,61 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
                     .setMessage(place.getAddress())
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            ParseObject locationObject = new ParseObject("Location");
-                            locationObject.put("owner", ParseUser.getCurrentUser());
-                            locationObject.put("placeName", pName);
-                            locationObject.put("placeId", pId);
-                            locationObject.put("placeAddress", pAddress);
-                            locationObject.put("placePhoneNumber", pPhoneNumber);
-
-                            ParseGeoPoint geoPoint = new ParseGeoPoint(pLatitude, pLongitude);
-                            locationObject.put("placeLatLng", geoPoint);
-
-                            locationObject.saveEventually();
-                            locationObject.pinInBackground("Location", new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    Intent returnIntent = new Intent();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("placeName", pName);
-                                    bundle.putString("placeId", pId);
-                                    bundle.putString("placeAddress", pAddress);
-                                    bundle.putString("placePhoneNumber", pPhoneNumber);
-                                    bundle.putDouble("latitude", pLatitude);
-                                    bundle.putDouble("longitude", pLongitude);
-                                    returnIntent.putExtras(bundle);
-                                    setResult(Activity.RESULT_OK, returnIntent);
-                                    finish();
+                            boolean match = false;
+                            ParseObject matchLocation = null;
+                            /*
+                            See if the selected location has already been pre-saved
+                            If so, just select the saved copy instead of selecting a new copy
+                             */
+                            for (ParseObject location : locationList) {
+                                if (location.getString("placeId").equals(pId)) {
+                                    match = true;
+                                    matchLocation = location;
                                 }
-                            });
+                            }
+                            if (!match) {
+                                ParseObject locationObject = new ParseObject("Location");
+                                locationObject.put("owner", ParseUser.getCurrentUser());
+                                locationObject.put("placeName", pName);
+                                locationObject.put("placeId", pId);
+                                locationObject.put("placeAddress", pAddress);
+                                locationObject.put("placePhoneNumber", pPhoneNumber);
+
+                                ParseGeoPoint geoPoint = new ParseGeoPoint(pLatitude, pLongitude);
+                                locationObject.put("placeLatLng", geoPoint);
+
+                                locationObject.saveEventually();
+                                locationObject.pinInBackground("Location", new SaveCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        Intent returnIntent = new Intent();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("placeName", pName);
+                                        bundle.putString("placeId", pId);
+                                        bundle.putString("placeAddress", pAddress);
+                                        bundle.putString("placePhoneNumber", pPhoneNumber);
+                                        bundle.putDouble("latitude", pLatitude);
+                                        bundle.putDouble("longitude", pLongitude);
+                                        returnIntent.putExtras(bundle);
+                                        setResult(Activity.RESULT_OK, returnIntent);
+                                        finish();
+                                    }
+                                });
+                            }
+                            else {
+                                Intent returnIntent = new Intent();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("placeName", matchLocation.getString("placeName"));
+                                bundle.putString("placeId", matchLocation.getString("placeId"));
+                                bundle.putString("placeAddress", matchLocation.getString("placeAddress"));
+                                bundle.putString("placePhoneNumber", matchLocation.getString("placePhoneNumber"));
+                                bundle.putDouble("latitude", matchLocation.getDouble("latitude"));
+                                bundle.putDouble("longitude", matchLocation.getDouble("longitude"));
+                                returnIntent.putExtras(bundle);
+                                setResult(Activity.RESULT_OK, returnIntent);
+                                finish();
+                            }
+
 
                         }
                     })
@@ -274,7 +308,7 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-
+            Toast.makeText(getBaseContext(), "Showing alert dialog in the middle of the screen", Toast.LENGTH_SHORT).show();
 
             // Display the third party attributions if set.
            /* final CharSequence thirdPartyAttribution = places.getAttributions();

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.adarshhasija.ahelp.PhoneNumberActivity">
+    <!--<item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:orderInCategory="100" app:showAsAction="never" />   -->
+
+
+    <item android:id="@+id/action_accept"
+        android:icon="@drawable/ic_action_accept"
+        android:title="@string/ok"
+        android:showAsAction="ifRoom" />
+</menu>
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/menu_phone_number.xml -->

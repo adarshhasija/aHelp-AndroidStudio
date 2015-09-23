@@ -55,7 +55,7 @@ public class SelectSubjectActivity extends ListActivity {
 	private FindCallback<ParseObject> populateListCallbackCloud = new FindCallback<ParseObject>() {
 
 		@Override
-		public void done(final List<ParseObject> locations, ParseException e) {
+		public void done(final List<ParseObject> subjects, ParseException e) {
 			
 			if(e == null) {
 		        ParseObject.unpinAllInBackground("Subject", new DeleteCallback() {
@@ -63,7 +63,7 @@ public class SelectSubjectActivity extends ListActivity {
 					@Override
 					public void done(ParseException e) {
 						if(e == null) {
-							ParseObject.pinAllInBackground("Subject", locations);
+							ParseObject.pinAllInBackground("Subject", subjects);
 						}
 						else {
 							Log.d("SelectLocationActivity", "Error: " + e.getMessage());
@@ -75,7 +75,7 @@ public class SelectSubjectActivity extends ListActivity {
 		        
 		        objectList.clear();
 		        List<String> list = new ArrayList<String>();
-		        for(ParseObject obj : locations) {
+		        for(ParseObject obj : subjects) {
 		        	objectList.add(obj);
 		        	list.add(obj.getString("title"));
 		        }

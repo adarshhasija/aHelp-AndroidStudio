@@ -1,0 +1,33 @@
+
+    
+    
+    
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <item android:id="@+id/progress"
+          android:showAsAction="ifRoom" />
+        
+        <item android:id="@+id/delete"
+            android:icon="@drawable/ic_action_discard"
+          android:title="Delete" 
+          android:showAsAction="ifRoom" />
+        
+   <!-- <item android:id="@+id/cancel"
+          android:icon="@drawable/ic_action_cancel"
+          android:title="Cancel"
+          android:showAsAction="ifRoom" />	
+        
+        <item android:id="@+id/accept"
+          android:icon="@drawable/ic_action_accept"
+          android:title="Accept"
+          android:showAsAction="ifRoom" />
+        
+        <item android:id="@+id/edit"
+          android:icon="@drawable/ic_action_edit"
+          android:title="Edit" />	-->
+        
+    </menu>
+
+
+
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/menu/record_detail_activity.xml -->

@@ -2,13 +2,15 @@ package com.adarshhasija.ahelp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,9 +29,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class RecordEditActivity extends ListActivity { //extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class RecordEditActivity extends Activity { //extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
 	private ParseObject scribeRecord=null;
+
+	private ListView listView;
+	private Button buttonCallScribe;
 
 	private String studentId=null;
 	private String studentName = null;
@@ -334,13 +339,19 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.record_edit_activity);
+		setContentView(R.layout.record_edit_activity);
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			studentId = extras.getString("id");
 			studentName = extras.getString("name");
 			studentNumber = extras.getString("number");
+			//set according to month and year that have been passed in
+			int month = extras.getInt("month");
+			int year = extras.getInt("year");
+			dateTime = Calendar.getInstance();
+			dateTime.set(Calendar.MONTH, month);
+			dateTime.set(Calendar.YEAR, year);
 		}
 
 		String parseId=null;
@@ -375,67 +386,77 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
             setupPrivateVariables(scribeRecord);
 		}
 
+		listView = (ListView) findViewById(R.id.list);
         List<String> content = new ArrayList<String>(setupUIContent(scribeRecord));
-
-	    
 	    RecordEditAdapter editAdapter = new RecordEditAdapter(this, 0, content);
-	    setListAdapter(editAdapter);
+	    listView.setAdapter(editAdapter);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent;
+				Bundle bundle;
 
-	}
-	
+				switch (position) {
+					case 0:
+						//intent = new Intent(RecordEditActivity.this, MonthYearPickerActivity.class);
+						intent = new Intent(RecordEditActivity.this, DatePickerActivity.class);
+						bundle = new Bundle();
+						bundle.putInt("month", dateTime.get(Calendar.MONTH));
+						bundle.putInt("year", dateTime.get(Calendar.YEAR));
+						intent.putExtras(bundle);
+						startActivityForResult(intent, position);
+						return;
+					case 1:
+						//intent = new Intent(RecordEditActivity.this, SelectLocationActivity.class);
+						intent = new Intent(RecordEditActivity.this, LocationAutocompleteActivity.class);
+						startActivityForResult(intent, position);
+						return;
+					case 2:
+						intent = new Intent(RecordEditActivity.this, SelectSubjectActivity.class);
+						startActivityForResult(intent, position);
+						return;
+					case 3:
+						//intent = new Intent(RecordEditActivity.this, RepresenteeEditActivity.class);
+						intent = new Intent(RecordEditActivity.this, SelectScribeActivity.class);
+						bundle = new Bundle();
+						bundle.putString("id", studentId);
+						bundle.putString("name", studentName);
+						bundle.putString("number", studentNumber);
+						intent.putExtras(bundle);
+						startActivityForResult(intent, position);
+						return;
+					default:
+						return;
+				}
+			}
+		});
 
-	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-
-		Intent intent;
-		Bundle bundle;
-		
-		switch (position) {
-			case 0:
-				//intent = new Intent(RecordEditActivity.this, MonthYearPickerActivity.class);
-				intent = new Intent(RecordEditActivity.this, DatePickerActivity.class);
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    bundle = new Bundle();
-                    bundle.putInt("month", extras.getInt("month"));
-                    bundle.putInt("year", extras.getInt("year"));
-                    intent.putExtras(extras);
-                }
-				startActivityForResult(intent, position);
-				return;
-			case 1:
-				//intent = new Intent(RecordEditActivity.this, SelectLocationActivity.class);
-                intent = new Intent(RecordEditActivity.this, LocationAutocompleteActivity.class);
-				startActivityForResult(intent, position);
-				return;
-			case 2:
-				intent = new Intent(RecordEditActivity.this, SelectSubjectActivity.class);
-				startActivityForResult(intent, position);
-				return;
-			case 3:
-			/*	bundle = new Bundle();
-		        bundle.putString("phoneNumber", representeePhoneNumber);
-		        bundle.putString("firstName", representeeFirstName);
-		        bundle.putString("lastName", representeeLastName);
-				
-				intent = new Intent(RecordEditActivity.this, RepresenteeEditActivity.class);    */
-                intent = new Intent(RecordEditActivity.this, SelectScribeActivity.class);
-				//intent.putExtras(bundle);
-				startActivityForResult(intent, position);
-				return;
-			default:
-				return;
+		buttonCallScribe = (Button) findViewById(R.id.button_call_scribe);
+		if (scribeId != null) {
+			buttonCallScribe.setVisibility(View.VISIBLE);
 		}
+		else {
+			buttonCallScribe.setVisibility(View.GONE);
+		}
+		buttonCallScribe.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String uri = "tel:" + scribeNumber.trim() ;
+				Intent intent = new Intent(Intent.ACTION_CALL);
+				intent.setData(Uri.parse(uri));
+				startActivity(intent);
+			}
+		});
+
 	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if(resultCode == Activity.RESULT_OK) {
-			RecordEditAdapter adapter = (RecordEditAdapter) getListAdapter();
+			RecordEditAdapter adapter = (RecordEditAdapter) listView.getAdapter();
 			if(data == null) {
 				return;
 			}
@@ -446,8 +467,8 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 					dateTime.set(Calendar.YEAR, extras.getInt("year"));
 					dateTime.set(Calendar.MONTH, extras.getInt("month"));
 					dateTime.set(Calendar.DAY_OF_MONTH, extras.getInt("dayOfMonth"));
-					dateTime.set(Calendar.HOUR_OF_DAY, extras.getInt("hourOfDay"));
-					dateTime.set(Calendar.MINUTE, extras.getInt("minute"));
+					//dateTime.set(Calendar.HOUR_OF_DAY, extras.getInt("hourOfDay"));
+					//dateTime.set(Calendar.MINUTE, extras.getInt("minute"));
 					
 				/*	String monthString = dateTime.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
 					int hourOfDay = dateTime.get(Calendar.HOUR_OF_DAY);
@@ -464,8 +485,10 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 											"  " + hourOfDay + ":" + minuteString + " " + am_pm;    */
 					
 					adapter.remove(adapter.getItem(0));
-					adapter.insert(dateTimeFormatted(dateTime.getTime()), 0);
+					String dateTimeString = dateTimeFormatted(dateTime.getTime());
+					adapter.insert(dateTimeString, 0);
 					adapter.notifyDataSetChanged();
+					Toast.makeText(getBaseContext(), "Date selected: "+dateTimeString, Toast.LENGTH_SHORT).show();
 					return;
 				case 1:
 					//locationUuid = extras.getString("uuid");
@@ -481,6 +504,7 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 					//adapter.insert(extras.getString("title"), 1);
                     adapter.insert(placeName, 1);
 					adapter.notifyDataSetChanged();
+					Toast.makeText(getBaseContext(), "Location selected: "+placeName, Toast.LENGTH_SHORT).show();
 					return;
 				case 2:
 					//subjectUuid = extras.getString("uuid");
@@ -489,33 +513,22 @@ public class RecordEditActivity extends ListActivity { //extends FragmentActivit
 					adapter.remove(adapter.getItem(2));
 					adapter.insert(subjectString, 2);
 					adapter.notifyDataSetChanged();
+					Toast.makeText(getBaseContext(), "Subject selected: "+subjectString, Toast.LENGTH_SHORT).show();
 					return;
 				case 3:
 					adapter.remove(adapter.getItem(3));
 					
 					String notes;
-				/*	if(extras.getString("phoneNumber") != null &&
-							extras.getString("firstName") != null && 
-								extras.getString("lastName") != null) {
-						representeePhoneNumber = extras.getString("phoneNumber");
-						representeeFirstName = extras.getString("firstName");
-						representeeLastName = extras.getString("lastName");
-						
-						notes = representeeFirstName + " " + representeeLastName;
-						adapter.insert(notes, 3);
-					}
-					else {
-						representeePhoneNumber = null;
-						representeeFirstName = null;
-						representeeLastName = null;
-						adapter.insert("No", 3);
-					}   */
                     scribeId = extras.getString("scribeId");
                     scribeName = extras.getString("scribeName");
                     scribeNumber = extras.getString("scribeNumber");
                     notes = scribeName;
                     adapter.insert(notes, 3);
 					adapter.notifyDataSetChanged();
+					Toast.makeText(getBaseContext(), "Scribe selected: "+scribeName, Toast.LENGTH_SHORT).show();
+					if (scribeId != null) {
+						buttonCallScribe.setVisibility(View.VISIBLE);
+					}
 					return;
 				case 50000: //This means we are returning from SelectContactActivity and new event has been successfully created
 					setResult(Activity.RESULT_OK, data);

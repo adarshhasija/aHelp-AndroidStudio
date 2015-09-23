@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.adarshhasija.ahelp"
-    android:versionCode="6"
-    android:versionName="1.1" >
+    android:versionCode="8"
+    android:versionName="2.1" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -20,19 +20,22 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <!--<permission
+    <!--
+    <permission
         android:name="com.adarshhasija.ahelp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.adarshhasija.ahelp.permission.C2D_MESSAGE" />-->
+    <uses-permission android:name="com.adarshhasija.ahelp.permission.C2D_MESSAGE" />
+    -->
+
 
     <!--
      The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -84,7 +87,7 @@
         <activity
             android:name=".MainListActivity"
             android:configChanges="orientation"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_main_list"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.searchable"
@@ -157,7 +160,7 @@
         </activity>
         <activity
             android:name=".RecordEditActivity"
-            android:label="@string/scribe_request" >
+            android:label="@string/new_record" >
         </activity>
         <activity
             android:name=".MonthYearPickerActivity"

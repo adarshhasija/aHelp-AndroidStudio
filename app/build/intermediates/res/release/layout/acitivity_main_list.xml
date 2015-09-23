@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.adarshhasija.ahelp.MainListActivity">
+
+    <Button
+        android:id="@+id/buttonNewContact"
+        android:contentDescription="@string/new_contact"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:textColor="#FFFFFFFF"
+        android:background="#FF0000FF"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/new_contact"
+        android:visibility="gone" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/list"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
+
+</RelativeLayout>
+<!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/layout/acitivity_main_list.xml -->

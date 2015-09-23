@@ -23,6 +23,7 @@ import java.util.Locale;
 public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterable {
 
 	private final Context context;
+	private int resource;
 	private List<ParseObject> recordList;
 	private final List<ParseObject> backupList; //used when filtering is happening
 	static class ViewHolderRecord {
@@ -220,6 +221,7 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 	public RecordAdapter(Context context, int resource, List<ParseObject> values) {
 		super(context, resource, values);
 		this.context = context;
+		this.resource = resource;
 		this.recordList = values;
 		this.backupList = new ArrayList<ParseObject>(values);
 	}
@@ -282,7 +284,8 @@ public class RecordAdapter extends ArrayAdapter<ParseObject> implements Filterab
 				viewHolder.updatedAtDateView.setContentDescription("Last modified: "+updatedAt);
 			}
 
-			convertView.setContentDescription("Exam on " + recordDateTime + " at " + placeName + ". Tap for more details");
+			convertView.setContentDescription("Exam on " + recordDateTime + " at " + placeName + ". Student is: "+studentName+
+					". Scribe is "+ scribeName+". Tap for more details");
 
 			//viewHolder.categoryView.setTag(record);
 		}

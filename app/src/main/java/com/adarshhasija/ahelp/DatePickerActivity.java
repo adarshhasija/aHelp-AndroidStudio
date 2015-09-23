@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class DatePickerActivity extends ListActivity {
 
-	private Calendar dateTime=null;
+	private Calendar dateTime=Calendar.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,6 @@ public class DatePickerActivity extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		int month = extras.getInt("month");
 		int year = extras.getInt("year");
-		
-		dateTime = Calendar.getInstance();
         dateTime.set(Calendar.YEAR, year);
 		dateTime.add(Calendar.MONTH, (month - dateTime.get(Calendar.MONTH)));
 		

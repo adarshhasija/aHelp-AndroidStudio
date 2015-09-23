@@ -1,124 +1,44 @@
 package com.adarshhasija.ahelp;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
+import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class MainListActivity extends ListActivity {
+public class MainListActivity extends Activity {
+
 	
 	private ArrayList<ParseObject> recordsList = new ArrayList<ParseObject>();
 
+	private ListView listView;
+	private Button buttonNewContact;
+
 	private MenuItem progressButton;
 	private MenuItem searchButton;
-	private MenuItem addButton;
+	private MenuItem addPersonButton;
 	private MenuItem contactsButton;
 	private MenuItem coordinatorButton;
 	private MenuItem refreshButton;
 	private MenuItem logoutButton;
 	private boolean refreshing=false;
-	
-	
-	/*
-	 * Parse callbacks
-	 * 
-	 */
-	private FindCallback<ParseObject> populateListCallbackLocal = new FindCallback<ParseObject>() {
-
-		@Override
-		public void done(final List<ParseObject> list, ParseException e) {
-			if (e == null) {
-				if(list.size() == 0) {
-					ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
-					if(cm.getActiveNetworkInfo() != null) {
-						populateListCloud();
-					}
-					return;
-				}
-				Collections.sort(list, new Comparator<ParseObject>() {
-		  			  public int compare(ParseObject o1, ParseObject o2) {
-		  				if(o2.getUpdatedAt() == null)
-		  			         if(o1.getUpdatedAt() == null)
-		  			            return 0; //equal
-		  			         else
-		  			            return -1; // null is before other strings
-		  				else // this.member != null
-		  			         if(o1.getUpdatedAt() == null)
-		  			            return 1;  // all other strings are after null
-		  			         else
-		  			        	 return o2.getUpdatedAt().compareTo(o1.getUpdatedAt()); //descending
-		  			  }
-		  			});
-				RecordAdapter recordAdapter = new RecordAdapter(MainListActivity.this, 0, list);
-	            setListAdapter(recordAdapter);
-	        } else {
-	            Log.d("MainListActivity", "Error: " + e.getMessage());
-	        }
-		}
-		
-	};
-	
-	private FindCallback<ParseObject> populateListCallbackCloud = new FindCallback<ParseObject>() {
-
-		@Override
-		public void done(List<ParseObject> list, ParseException e) {		
-			if (e == null) {
-	            Collections.sort(list, new Comparator<ParseObject>() {
-	  			  public int compare(ParseObject o1, ParseObject o2) {
-	  				  return o2.getUpdatedAt().compareTo(o1.getUpdatedAt()); //descending
-	  			  }
-	  			});
-	            for(ParseObject obj : list) {
-	            	obj.getParseObject("location").fetchIfNeededInBackground();
-	            	obj.getParseObject("subject").fetchIfNeededInBackground();
-	            	try {
-						List<ParseObject> actionList = obj.getList("actions");
-		            	for(int i = 0; i < actionList.size(); i++) {
-		            		((ParseObject) obj.getList("actions").get(i)).fetchIfNeeded();
-		            	}
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-	            }
-	            ParseObject.pinAllInBackground("ScribeRequest", list);
-	            
-	            RecordAdapter recordAdapter = new RecordAdapter(MainListActivity.this, 0, list);
-	            setListAdapter(recordAdapter);
-	         /*   if(refreshing) {
-	            	toggleProgressBarVisibility();
-	            	refreshing = false;
-	            }	*/		
-	        } else {
-	            Log.d("MainListActivity", "Error: " + e.getMessage());
-	        }	
-		}
-		
-	};
 	
 	
 	/*
@@ -130,7 +50,7 @@ public class MainListActivity extends ListActivity {
 
 		@Override
 		public boolean onQueryTextChange(String newText) {
-			MainContactsListAdapter adapter = (MainContactsListAdapter) getListAdapter();
+			ContactsListAdapter adapter = (ContactsListAdapter) listView.getAdapter();
 			if(adapter != null) {
 				adapter.getFilter().filter(newText);
 			}
@@ -153,11 +73,21 @@ public class MainListActivity extends ListActivity {
 	 * 
 	 * 
 	 */
-	private void addPressed() {
-		Intent intent = new Intent(this, RecordEditActivity.class);
-		int index = 50000; //random very large integer to show insert
-		startActivityForResult(intent, index);
+	private void addPersonPressed() {
+		//Intent intent = new Intent(this, RecordEditActivity.class);
+		//int index = 50000; //random very large integer to show insert
+		//startActivityForResult(intent, index);
+		Intent i = new Intent(Intent.ACTION_INSERT);
+		i.setType(ContactsContract.Contacts.CONTENT_TYPE);
+		if (Integer.valueOf(Build.VERSION.SDK) > 14)
+			i.putExtra("finishActivityOnSaveCompleted", true); // Fix for 4.0.3 +
+		startActivityForResult(i, 50000);
 	};
+
+	private void refreshPressed() {
+		populateList();
+		Toast.makeText(getBaseContext(), "Refresh completed", Toast.LENGTH_SHORT).show();
+	}
 	
 	private void contactsPressed() {
 		Intent intent = new Intent(this, ContactsListActivity.class);
@@ -167,12 +97,6 @@ public class MainListActivity extends ListActivity {
 	private void coordinatorPressed() {
 		Intent intent = new Intent(this, CoordinatorListActivity.class);
 		startActivity(intent);
-	};
-	
-	private void refreshPressed() {
-		refreshing=true;
-		toggleProgressBarVisibility();
-		populateList();
 	};
 	
 	private void logoutPressed() {
@@ -193,43 +117,16 @@ public class MainListActivity extends ListActivity {
 	private void populateList() {
         MainApplication mainApplication = (MainApplication) getBaseContext().getApplicationContext();
         List<Contact> localContacts = mainApplication.getUpdatedDeviceContactsListAsArray();
-		MainContactsListAdapter adapter = new MainContactsListAdapter(this, 0, localContacts);
-		setListAdapter(adapter);
-        
-	/*	populateListLocal();
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
-		if(cm.getActiveNetworkInfo() != null) {
-			//populateListCloud();
-		}   */
-	}
-	
-	private void populateListLocal() {
-		ParseQuery<ParseObject> localQuery = ParseQuery.getQuery("ScribeRequest");
-		localQuery.fromLocalDatastore();
-		localQuery.findInBackground(populateListCallbackLocal);
-	}
-	
-	private void populateListCloud() {
-		ParseQuery<ParseObject> cloudQuery = ParseQuery.getQuery("ScribeRequest");
-		cloudQuery.findInBackground(populateListCallbackCloud);
-	}
-	
-	private void toggleProgressBarVisibility() {
-		if(!refreshing) return;
-		
-		if(!progressButton.isVisible()) {
-			progressButton.setVisible(true);
-			searchButton.setVisible(false);
-			addButton.setVisible(false);
-			refreshButton.setVisible(false);
-			logoutButton.setVisible(false);
+		ContactsListAdapter adapter = new ContactsListAdapter(this, 0, localContacts);
+		listView.setAdapter(adapter);
+
+		if (localContacts.size() == 0) {
+			listView.setVisibility(View.GONE);
+			buttonNewContact.setVisibility(View.VISIBLE);
 		}
-		else {
-			progressButton.setVisible(false);
-			searchButton.setVisible(true);
-			addButton.setVisible(true);
-			refreshButton.setVisible(true);
-			logoutButton.setVisible(true);
+		else if (localContacts.size() > 0) {
+			listView.setVisibility(View.VISIBLE);
+			buttonNewContact.setVisibility(View.GONE);
 		}
 	}
 	
@@ -240,99 +137,49 @@ public class MainListActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	}
-	
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		populateList();
-	}
+		setContentView(R.layout.acitivity_main_list);
 
-	@Override
-	public void onStart() {
-		TextView emptyView = new TextView(this);
-		((ViewGroup) getListView().getParent()).addView(emptyView);
-		emptyView.setText("There are currently no scribe requests to list.\n Tap + to add a record");
-		emptyView.setGravity(Gravity.CENTER);
-		getListView().setEmptyView(emptyView);
-		
-		super.onStart();
+		buttonNewContact = (Button) findViewById(R.id.buttonNewContact);
+		buttonNewContact.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Intent.ACTION_INSERT);
+				i.setType(ContactsContract.Contacts.CONTENT_TYPE);
+				if (Integer.valueOf(Build.VERSION.SDK) > 14)
+					i.putExtra("finishActivityOnSaveCompleted", true); // Fix for 4.0.3 +
+				startActivityForResult(i, 50000);
+			}
+		});
+		listView = (ListView) findViewById(R.id.list);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				//Intent intent = new Intent(this, MainDetailActivity.class);
+				ParseAnalytics.trackEvent("contactTapped");
+				Contact contact = (Contact) listView.getAdapter().getItem(position);
+				Intent intent = new Intent(MainListActivity.this, ContactRecordsActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("id", contact.getId());
+				bundle.putString("number", contact.getNumber());
+				bundle.putString("name", contact.getName());
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+
+		populateList();
 	}
 	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		//MainApplication mainApplication = (MainApplication) getActivity().getApplicationContext();
-		//ParseObject record = mainApplication.getModifiedRecord();
-		if(resultCode == Activity.RESULT_OK) {
-			if(data == null) {
-				if(requestCode > -1 && requestCode != 50000) { //delete
-					RecordAdapter adapter = (RecordAdapter) getListAdapter();
-					if(adapter != null) {
-						ParseObject parseObject = adapter.getItem(requestCode);
-						adapter.remove(parseObject);
-						adapter.notifyDataSetChanged();
-						return;
-					}
-					return;
-				}
-				else {	return;	}
-			}
-			ParseObject record=null;
-			Bundle extras = data.getExtras();
-			String recordParseId = extras.getString("parseId");
-			String recordUuid = extras.getString("uuid");
-			ParseQuery<ParseObject> recordQuery = ParseQuery.getQuery("ScribeRequest");
-			recordQuery.fromLocalDatastore();
-			if(recordUuid != null) {
-				recordQuery.whereEqualTo("uuid", recordUuid);
-				try {
-					record = recordQuery.getFirst();
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
-			else {
-				try {
-					record = recordQuery.get(recordParseId);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(record != null) {
-				RecordAdapter adapter = (RecordAdapter) getListAdapter();
-				//random large number for insert
-				if(requestCode == 50000) {
-					adapter.insert(record, 0);
-				}
-				else {
-					adapter.remove(record);
-					adapter.insert(record, 0);
-				}
-				adapter.notifyDataSetChanged();
-				getListView().scrollTo(0, 0);  //scroll to top after done	
-			}
-		}
 		super.onActivityResult(requestCode, resultCode, data);
-	}
-	
-	
-	@Override
-	public void onListItemClick(ListView listView, View view, int position,
-			long id) {
-		super.onListItemClick(listView, view, position, id);
+		//MainApplication mainApplication = (MainApplication) getActivity().getApplicationContext();
 
-		//Intent intent = new Intent(this, MainDetailActivity.class);
-        Contact contact = (Contact) getListAdapter().getItem(position);
-        Intent intent = new Intent(this, ContactRecordsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("id", contact.getId());
-        bundle.putString("number", contact.getNumber());
-        bundle.putString("name", contact.getName());
-        intent.putExtras(bundle);
-        startActivity(intent);
+		if (requestCode == 50000 && resultCode == Activity.RESULT_OK) {
+			populateList();
+		}
+
 	}
 	
 	
@@ -342,18 +189,18 @@ public class MainListActivity extends ListActivity {
 	    switch (item.getItemId()) {
 	        case R.id.search:
 	            return true;
-	    /*    case R.id.add:
-	            addPressed();
+	        case R.id.add_person:
+	            addPersonPressed();
 	            return true;
-	        case R.id.contacts:
+	    /*    case R.id.contacts:
 	        	contactsPressed();
 	        	return true;
 	        case R.id.coordinator:
 	        	coordinatorPressed();
-	        	return true;
+	        	return true;	*/
 	        case R.id.refresh:
 	        	refreshPressed();
-	        	return true;	*/
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -380,10 +227,10 @@ public class MainListActivity extends ListActivity {
 	    //searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 	    
 		
-		//addButton = (MenuItem)menu.findItem(R.id.add);
+		addPersonButton = (MenuItem)menu.findItem(R.id.add_person);
 		//contactsButton = (MenuItem)menu.findItem(R.id.contacts);
 		//coordinatorButton = (MenuItem)menu.findItem(R.id.coordinator);
-		//refreshButton = (MenuItem)menu.findItem(R.id.refresh);
+		refreshButton = (MenuItem)menu.findItem(R.id.refresh);
 		//logoutButton = (MenuItem)menu.findItem(R.id.logout);
 		
 		return super.onCreateOptionsMenu(menu);

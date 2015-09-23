@@ -3,6 +3,7 @@ package com.adarshhasija.ahelp;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,12 +13,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +41,7 @@ public class ContactRecordsActivity extends Activity {
     private TextView textViewNoRecords;
 
     MenuItem addMenuItem;
+    MenuItem callMenuItem;
 
 
     /*
@@ -64,8 +67,12 @@ public class ContactRecordsActivity extends Activity {
                                 return o2.getUpdatedAt().compareTo(o1.getUpdatedAt()); //descending
                     }
                 }); */
-                RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
-                listView.setAdapter(recordAdapter);
+                RecordAdapter recordAdapter = (RecordAdapter) listView.getAdapter();
+                recordAdapter.clear();
+                recordAdapter.addAll(list);
+                recordAdapter.notifyDataSetChanged();
+                listView.setVisibility(View.VISIBLE);
+                buttonNewRecord.setVisibility(View.GONE);
 
                 if(list.size() == 0) {
                     ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
@@ -95,8 +102,10 @@ public class ContactRecordsActivity extends Activity {
                     }); */
                     ParseObject.pinAllInBackground("ScribeRecord", list);
 
-                    RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
-                    listView.setAdapter(recordAdapter);
+                    RecordAdapter recordAdapter = (RecordAdapter) listView.getAdapter();
+                    recordAdapter.clear();
+                    recordAdapter.addAll(list);
+                    recordAdapter.notifyDataSetChanged();
                     listView.setVisibility(View.VISIBLE);
                     buttonNewRecord.setVisibility(View.GONE);
                 }
@@ -129,10 +138,6 @@ public class ContactRecordsActivity extends Activity {
     private void populateListLocal() {
         Bundle extras = getIntent().getExtras();
 
-        //ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRecord");
-        //query.fromLocalDatastore();
-        //query.addAscendingOrder("dateTime");
-
         ParseQuery<ParseObject> queryStudent = ParseQuery.getQuery("ScribeRecord");
         queryStudent.whereEqualTo("studentId", extras.getString("id"));
 
@@ -145,6 +150,18 @@ public class ContactRecordsActivity extends Activity {
 
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
         mainQuery.fromLocalDatastore();
+        Calendar before = Calendar.getInstance();
+        before.setTime(mCalendar.getTime());
+        before.add(Calendar.MONTH, -1);
+        mainQuery.whereGreaterThan("dateTime", before.getTime());
+        Calendar after = Calendar.getInstance();
+        after.setTime(mCalendar.getTime());
+        after.add(Calendar.MONTH, 1);
+        after.set(Calendar.DATE, 1);
+        after.set(Calendar.HOUR_OF_DAY, 0);
+        after.set(Calendar.MINUTE, 0);
+        after.set(Calendar.SECOND, 0);
+        mainQuery.whereLessThan("dateTime", after.getTime());
         mainQuery.addAscendingOrder("dateTime");
 
         mainQuery.findInBackground(populateListCallbackLocal);
@@ -169,8 +186,22 @@ public class ContactRecordsActivity extends Activity {
         queries.add(queryScribe);
 
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
-        mainQuery.fromLocalDatastore();
-        mainQuery.whereEqualTo("user", ParseUser.getCurrentUser());
+        Calendar before = Calendar.getInstance();
+        before.setTime(mCalendar.getTime());
+        //before.add(Calendar.MONTH, -1);
+        before.set(Calendar.DAY_OF_MONTH, 1);
+        before.set(Calendar.HOUR_OF_DAY, 0);
+        before.set(Calendar.MINUTE, 0);
+        before.set(Calendar.SECOND, 0);
+        mainQuery.whereGreaterThanOrEqualTo("dateTime", before.getTime());
+        Calendar after = Calendar.getInstance();
+        after.setTime(mCalendar.getTime());
+        after.add(Calendar.MONTH, 1);
+        after.set(Calendar.DATE, 1);
+        after.set(Calendar.HOUR_OF_DAY, 0);
+        after.set(Calendar.MINUTE, 0);
+        after.set(Calendar.SECOND, 0);
+        mainQuery.whereLessThan("dateTime", after.getTime());
         mainQuery.addAscendingOrder("dateTime");
 
         mainQuery.findInBackground(populateListCallbackCloud);
@@ -211,6 +242,7 @@ public class ContactRecordsActivity extends Activity {
         setTitle(mContactName);
         buttonMonthYear = (Button) findViewById(R.id.buttonMonthYear);
         buttonMonthYear.setText(mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + mCalendar.get(Calendar.YEAR));
+        buttonMonthYear.setContentDescription("Change date button. Currect date is " + buttonMonthYear.getText() + ". Tap to change");
         buttonMonthYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -238,6 +270,7 @@ public class ContactRecordsActivity extends Activity {
         buttonNewRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ParseAnalytics.trackEvent("monthYearTapped");
                 Intent intent = new Intent(ContactRecordsActivity.this, RecordEditActivity.class);
                 Bundle extras = getIntent().getExtras();
                 if (extras != null) {
@@ -253,6 +286,10 @@ public class ContactRecordsActivity extends Activity {
             }
         });
 
+        List<ParseObject> list = new ArrayList<ParseObject>();
+        RecordAdapter recordAdapter = new RecordAdapter(ContactRecordsActivity.this, 0, list);
+        listView.setAdapter(recordAdapter);
+
         populateList();
     }
 
@@ -260,63 +297,75 @@ public class ContactRecordsActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-Log.d("HELLO", "**************"+requestCode+"**********"+resultCode+"*********"+data);
+
         if (resultCode == Activity.RESULT_OK && requestCode == 5000 && data != null) {
             //Month/year changed
+            ParseAnalytics.trackEvent("monthYearChanged");
             Bundle extras = data.getExtras();
             int month = extras.getInt("month");
             int year = extras.getInt("year");
             mCalendar.set(Calendar.MONTH, month);
             mCalendar.set(Calendar.YEAR, year);
             buttonMonthYear.setText(mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + " " + mCalendar.get(Calendar.YEAR));
+            buttonMonthYear.setContentDescription("Change date button. Currect date is " + buttonMonthYear.getText() + ". Tap to change");
+            Toast.makeText(getBaseContext(), "Month and year successfully changed to "+buttonMonthYear.getText(), Toast.LENGTH_SHORT).show();
             populateList();
         }
 
         else if (resultCode == Activity.RESULT_OK && requestCode == 1000 && data != null) {
             //new record added
-            Log.d("HELLO", "**********ONE***********");
+            ParseAnalytics.trackEvent("newRecordAdded");
             Bundle extras = data.getExtras();
             String uuid = extras.getString("uuid");
-            Log.d("HELLO", "***************"+uuid+"****************");
             ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRecord");
             query.fromLocalDatastore();
             query.whereEqualTo("uuid", uuid);
+            ParseObject record = null;
             try {
-                ParseObject record = query.getFirst();
-                Log.d("HELLO", "**********TWO*************");
+                record = query.getFirst();
                 int index = getInsertIndex(record.getDate("dateTime"));
-                Log.d("HELLO", "*************"+index+"**************");
                 RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
                 adapter.insert(record, index);
                 adapter.notifyDataSetChanged();
+                Toast.makeText(getBaseContext(), "Successfully added new record", Toast.LENGTH_SHORT).show();
+                listView.setVisibility(View.VISIBLE);
+                buttonNewRecord.setVisibility(View.GONE);
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
         }
 
         else if (resultCode == Activity.RESULT_OK && data != null) {
             //existing record modified
             Bundle extras = data.getExtras();
             String uuid = extras.getString("uuid");
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRequest");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("ScribeRecord");
             query.fromLocalDatastore();
             query.whereEqualTo("uuid", uuid);
+            ParseObject record=null;
             try {
-                ParseObject record = query.getFirst();
+                record = query.getFirst();
                 RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
                 adapter.remove(adapter.getItem(requestCode));
-                adapter.insert(record, requestCode);
+                int index = getInsertIndex(record.getDate("dateTime"));
+                adapter.insert(record, index);
                 adapter.notifyDataSetChanged();
+                Toast.makeText(getBaseContext(), "Successfully changed record", Toast.LENGTH_SHORT).show();
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
         }
 
-        else if (requestCode > 0 && resultCode == Activity.RESULT_OK) {
+        else if (requestCode > -1 && resultCode == Activity.RESULT_OK) {
             //Activity result is ok but data == null...this means record has been deleted
             RecordAdapter adapter = (RecordAdapter) listView.getAdapter();
             adapter.remove(adapter.getItem(requestCode));
             adapter.notifyDataSetChanged();
+            Toast.makeText(getBaseContext(), "Successfully deleted record", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -325,6 +374,7 @@ Log.d("HELLO", "**************"+requestCode+"**********"+resultCode+"*********"+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_contact_records, menu);
         addMenuItem = (MenuItem) menu.findItem(R.id.action_new);
+        callMenuItem = (MenuItem) menu.findItem(R.id.action_call);
 
         return true;
     }
@@ -352,6 +402,13 @@ Log.d("HELLO", "**************"+requestCode+"**********"+resultCode+"*********"+
             startActivityForResult(intent, 1000);
 
             return true;
+        }
+
+        if (id == R.id.action_call) {
+            String uri = "tel:" + mContactNumber.trim() ;
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -46,6 +46,7 @@ public class RecordEditAdapter extends ArrayAdapter<String> {
 	    if(position == 1) viewHolder.labelView.setText("Location");
 	    if(position == 2) viewHolder.labelView.setText("Subject");
 	    if(position == 3) viewHolder.labelView.setText("Select Scribe");
+
 	    viewHolder.contentView.setText(values.get(position));
 	    viewHolder.contentView.setContentDescription(viewHolder.labelView.getText() + " " + viewHolder.contentView.getText());
 

@@ -235,12 +235,17 @@
     <!-- From: file:/Users/adarshhasija/Desktop/workspaces/Android_Studio/aScribe/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
+    <string name="add_person">Add person button</string>
+    <string name="add_record_button">Add record button</string>
     <string name="additional_notes">Additional notes</string>
     <string name="amount">Amount</string>
     <string name="app_name">aScribe</string>
     <string name="archives">Archives</string>
     <string name="autocomplete_hint">Type here</string>
     <string name="bank_details">Bank details</string>
+    <string name="call_person">Call person button</string>
+    <string name="call_scribe">Call Scribe</string>
+    <string name="call_scribe_button">call scribe button</string>
     <string name="cancel">Cancel</string>
     <string name="category">Category(eg: books)</string>
     <string name="change_date_button">Change date button</string>
@@ -309,6 +314,7 @@ available. Please contact the developer for assistance.</string>
     <string name="locations">Locations</string>
     <string name="login">LOGIN</string>
     <string name="message">Message</string>
+    <string name="new_contact">New Contact</string>
     <string name="new_exam">New Exam</string>
     <string name="new_location">New location</string>
     <string name="new_record">New Record</string>
@@ -323,14 +329,14 @@ available. Please contact the developer for assistance.</string>
     <string name="phone_number">Phone number</string>
     <string name="place_details">&lt;b>%1$s&lt;/b>&lt;br/>&lt;i>Place Id: %2$s&lt;/i>&lt;br/>Address: %3$s&lt;br/>Phone: %4$s&lt;br/>Website: %5$s</string>
     <string name="record">Record</string>
+    <string name="refresh">Refresh button</string>
     <string name="reply">Reply</string>
     <string name="representing_someone">Representing Someone</string>
     <string name="rupees">Rs</string>
     <string name="save">Save</string>
-    <string name="scribe_request">Scribe Request</string>
     <string name="search_hint">Enter name</string>
     <string name="search_results">Search Results</string>
-    <string name="search_title">Search</string>
+    <string name="search_title">Search button</string>
     <string name="select_contact">Select Contact</string>
     <string name="select_date">Select date</string>
     <string name="select_location">Select Location</string>
@@ -358,6 +364,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_google_maps">Map</string>
     <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
     <string name="title_activity_location_autocomplete">Location</string>
+    <string name="title_activity_main_list">All Contacts</string>
     <string name="title_activity_paces_picker">PacesPickerActivity</string>
     <string name="title_activity_phone_number">PhoneNumberActivity</string>
     <string name="title_activity_select_scribe">SelectScribeActivity</string>
