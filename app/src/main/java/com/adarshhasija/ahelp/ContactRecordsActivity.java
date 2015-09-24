@@ -152,8 +152,11 @@ public class ContactRecordsActivity extends Activity {
         mainQuery.fromLocalDatastore();
         Calendar before = Calendar.getInstance();
         before.setTime(mCalendar.getTime());
-        before.add(Calendar.MONTH, -1);
-        mainQuery.whereGreaterThan("dateTime", before.getTime());
+        before.set(Calendar.DAY_OF_MONTH, 1);
+        before.set(Calendar.HOUR_OF_DAY, 0);
+        before.set(Calendar.MINUTE, 0);
+        before.set(Calendar.SECOND, 0);
+        mainQuery.whereGreaterThanOrEqualTo("dateTime", before.getTime());
         Calendar after = Calendar.getInstance();
         after.setTime(mCalendar.getTime());
         after.add(Calendar.MONTH, 1);
