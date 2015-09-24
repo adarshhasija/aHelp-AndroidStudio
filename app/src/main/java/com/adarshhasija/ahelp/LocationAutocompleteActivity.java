@@ -104,8 +104,9 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
                 bundle.putString("placeId", place.getString("placeId"));
                 bundle.putString("placeAddress", place.getString("placeAddress"));
                 bundle.putString("placePhoneNumber", place.getString("placePhoneNumber"));
-                bundle.putDouble("latitude", place.getDouble("latitude"));
-                bundle.putDouble("longitude", place.getDouble("latitude"));
+                ParseGeoPoint geoPoint = place.getParseGeoPoint("placeLatLng");
+                bundle.putDouble("latitude", geoPoint.getLatitude());
+                bundle.putDouble("longitude", geoPoint.getLongitude());
                 returnIntent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
@@ -291,8 +292,10 @@ public class LocationAutocompleteActivity extends Activity implements GoogleApiC
                                 bundle.putString("placeId", matchLocation.getString("placeId"));
                                 bundle.putString("placeAddress", matchLocation.getString("placeAddress"));
                                 bundle.putString("placePhoneNumber", matchLocation.getString("placePhoneNumber"));
-                                bundle.putDouble("latitude", matchLocation.getDouble("latitude"));
-                                bundle.putDouble("longitude", matchLocation.getDouble("longitude"));
+
+                                ParseGeoPoint geoPoint = matchLocation.getParseGeoPoint("placeLatLng");
+                                bundle.putDouble("latitude", geoPoint.getLatitude());
+                                bundle.putDouble("longitude", geoPoint.getLongitude());
                                 returnIntent.putExtras(bundle);
                                 setResult(Activity.RESULT_OK, returnIntent);
                                 finish();

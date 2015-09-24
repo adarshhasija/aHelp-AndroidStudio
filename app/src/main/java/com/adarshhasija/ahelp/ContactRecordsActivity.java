@@ -188,7 +188,6 @@ public class ContactRecordsActivity extends Activity {
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
         Calendar before = Calendar.getInstance();
         before.setTime(mCalendar.getTime());
-        //before.add(Calendar.MONTH, -1);
         before.set(Calendar.DAY_OF_MONTH, 1);
         before.set(Calendar.HOUR_OF_DAY, 0);
         before.set(Calendar.MINUTE, 0);
